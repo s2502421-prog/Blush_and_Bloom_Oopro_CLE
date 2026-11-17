@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.bandb.SuccessController"
+           stylesheets="@success.css"
+           prefWidth="1280"
+           prefHeight="720"
+           styleClass="success-background">
+
+    <VBox fx:id="successCard"
+          alignment="CENTER"
+          spacing="18"
+          maxWidth="480"
+          maxHeight="440"
+          styleClass="success-card">
+
+        <Label fx:id="checkIcon"
+               text="✓"
+               styleClass="check-icon"/>
+
+        <Label text="Account Created!"
+               styleClass="success-title"/>
+
+        <Label text="Welcome to Blush &amp; Bloom!"
+               styleClass="welcome-text"/>
+
+        <Label text="Your beauty journey starts here."
+               styleClass="description"/>
+
+        <Button text="Continue to Login"
+                onAction="#handleContinue"
+                styleClass="continue-button"/>
+
+    </VBox>
+</StackPane>

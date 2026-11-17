@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.bandb.RegisterController"
+           prefWidth="1280"
+           prefHeight="720"
+           stylesheets="@login.css"
+           styleClass="background">
+
+    <VBox alignment="CENTER"
+          spacing="12"
+          maxWidth="440"
+          maxHeight="630"
+          styleClass="login-card">
+
+        <Label text="❀"
+               styleClass="flower-logo"/>
+
+        <Label text="Blush &amp; Bloom"
+               styleClass="shop-title"/>
+
+        <Label text="Create Your Account"
+               styleClass="login-title"/>
+
+        <TextField fx:id="fullNameField"
+                   promptText="Full Name"
+                   maxWidth="330"
+                   prefHeight="42"
+                   styleClass="input-field"/>
+
+        <TextField fx:id="usernameField"
+                   promptText="Username"
+                   maxWidth="330"
+                   prefHeight="42"
+                   styleClass="input-field"/>
+
+        <TextField fx:id="emailField"
+                   promptText="Email Address"
+                   maxWidth="330"
+                   prefHeight="42"
+                   styleClass="input-field"/>
+
+        <PasswordField fx:id="passwordField"
+                       promptText="Password"
+                       maxWidth="330"
+                       prefHeight="42"
+                       styleClass="input-field"/>
+
+        <PasswordField fx:id="confirmPasswordField"
+                       promptText="Confirm Password"
+                       maxWidth="330"
+                       prefHeight="42"
+                       styleClass="input-field"/>
+
+        <Region prefHeight="10"/>
+
+        <Button text="Create Account"
+                onAction="#handleRegister"
+                prefWidth="330"
+                prefHeight="45"
+                styleClass="login-button"/>
+
+        <Button text="Back to Login"
+                onAction="#handleBack"
+                prefWidth="330"
+                prefHeight="45"
+                styleClass="register-button"/>
+
+    </VBox>
+</StackPane>

@@ -1,0 +1,141 @@
+/* Background */
+.background {
+    -fx-background-color:
+        linear-gradient(
+            to bottom right,
+            #F7C4CE,
+            #FBE3E5,
+            #EBA9B9
+        );
+}
+
+/* Main Card */
+.login-card {
+    -fx-background-color: rgba(255, 250, 250, 0.94);
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(146, 58, 84, 0.20),
+        25, 0, 0, 8
+    );
+}
+
+/* Flower Logo */
+.flower-logo {
+    -fx-font-size: 45px;
+    -fx-text-fill: #A43D58;
+}
+
+/* Shop Name */
+.shop-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 36px;
+    -fx-font-style: italic;
+    -fx-text-fill: #962C49;
+}
+
+/* Subtitle */
+.subtitle {
+    -fx-font-size: 11px;
+    -fx-text-fill: #B05C72;
+}
+
+/* Login Title */
+.login-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #663D43;
+}
+
+/* Input Fields */
+.input-field {
+    -fx-background-color: #FFF9FA;
+    -fx-background-radius: 10;
+    -fx-border-color: #D9A6B2;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.5;
+    -fx-padding: 10 15;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #B09A9E;
+}
+
+.input-field:focused {
+    -fx-border-color: #B84769;
+    -fx-background-color: white;
+}
+
+/* Login Button */
+.login-button {
+    -fx-background-color:
+        linear-gradient(
+            to right,
+            #F39AAE,
+            #B94365
+        );
+    -fx-background-radius: 25;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #A83258;
+}
+
+/* Divider */
+.divider-text {
+    -fx-font-size: 13px;
+    -fx-text-fill: #A37A83;
+}
+
+/* Register Button */
+.register-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 25;
+    -fx-border-color: #D88FA3;
+    -fx-border-radius: 25;
+    -fx-border-width: 1.5;
+    -fx-text-fill: #A63859;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.register-button:hover {
+    -fx-background-color: #FCE1E8;
+}
+
+/* Decorative Flowers */
+.decoration-flower {
+    -fx-font-size: 65px;
+    -fx-text-fill: rgba(176, 65, 94, 0.35);
+}
+.background {
+    -fx-background-image: url("makeup-bg.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+
+/* Custom Login Error Message */
+
+.login-error {
+    -fx-background-color: #FCE4EC;
+    -fx-background-radius: 12;
+    -fx-border-color: #E9A3BA;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+
+    -fx-text-fill: #A8325D;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 12 18;
+    -fx-alignment: CENTER;
+}

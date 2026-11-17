@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.bandb.LoginController"
+           prefWidth="1280"
+           prefHeight="720"
+           stylesheets="@login.css"
+           styleClass="background">
+
+        <VBox alignment="CENTER"
+              maxWidth="420"
+              maxHeight="520"
+              spacing="15"
+              styleClass="login-card">
+
+                <Label text="❀"
+                       styleClass="flower-logo"/>
+
+                <Label text="Blush &amp; Bloom"
+                       styleClass="shop-title"/>
+
+                <Label text="B E A U T Y  S H O P"
+                       styleClass="subtitle"/>
+
+                <Region prefHeight="10"/>
+
+                <Label text="Customer Login"
+                       styleClass="login-title"/>
+
+
+
+                <Region prefHeight="5"/>
+
+                <TextField fx:id="usernameField"
+                           promptText="Username"
+                           maxWidth="310"
+                           prefHeight="45"
+                           styleClass="input-field"/>
+
+                <PasswordField fx:id="passwordField"
+                               promptText="Password"
+                               maxWidth="310"
+                               prefHeight="45"
+                               styleClass="input-field"/>
+
+                <Region prefHeight="10"/>
+
+                <Button text="Login"
+                        onAction="#handleLogin"
+                        prefWidth="310"
+                        prefHeight="45"
+                        styleClass="login-button"/>
+
+
+                <Label fx:id="loginErrorLabel"
+                       text=""
+                       visible="false"
+                       managed="false"
+                       wrapText="true"
+                       maxWidth="330"
+                       styleClass="login-error"/>
+
+
+                <Label text="──────── or ────────"
+                       styleClass="divider-text"/>
+
+                <Button text="Create an Account"
+                        onAction="#handleRegisterPage"
+                        prefWidth="310"
+                        prefHeight="45"
+                        styleClass="register-button"/>
+
+        </VBox>
+
+</StackPane>
