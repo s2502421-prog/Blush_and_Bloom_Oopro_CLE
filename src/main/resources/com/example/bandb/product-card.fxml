@@ -1,0 +1,35 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      alignment="TOP_CENTER" spacing="9"
+      minWidth="225" prefWidth="225" maxWidth="225"
+      minHeight="455" prefHeight="455" maxHeight="455"
+      style="-fx-padding: 14; -fx-background-color: white; -fx-background-radius: 18; -fx-border-color: #F2DAE4; -fx-border-radius: 18;">
+    <children>
+        <Label fx:id="cardRecommendation" text=" "
+               style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #C45D89;"/>
+        <StackPane fx:id="cardPreview"
+                   minWidth="190" prefWidth="190" maxWidth="190"
+                   minHeight="220" prefHeight="220" maxHeight="220"
+                   style="-fx-background-color: #FFF5F9; -fx-background-radius: 14;"/>
+        <Label fx:id="cardCategory" text="CATEGORY"
+               style="-fx-font-size: 10px; -fx-text-fill: #B67B91; -fx-font-weight: bold;"/>
+        <Label fx:id="cardName" text="Product" wrapText="true"
+               style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #563C49;"/>
+        <HBox alignment="CENTER" spacing="7">
+            <Label fx:id="cardColor" text="●"
+                   style="-fx-font-size: 16px; -fx-text-fill: #E9A6C0;"/>
+            <Label fx:id="cardShade" text="Shade"
+                   style="-fx-font-size: 12px; -fx-text-fill: #846A76;"/>
+        </HBox>
+        <Label fx:id="cardPrice" text="₱0.00"
+               style="-fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: #C45D89;"/>
+        <Region VBox.vgrow="ALWAYS"/>
+        <Button fx:id="cardAddButton" text="Add to Cart"
+                maxWidth="Infinity" prefHeight="38"
+                style="-fx-background-color: #E9A6C0; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;"/>
+    </children>
+</VBox>

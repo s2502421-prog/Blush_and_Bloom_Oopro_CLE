@@ -1,0 +1,38 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      alignment="CENTER"
+      spacing="14"
+      prefWidth="440"
+      style="-fx-padding: 25; -fx-background-color: #FFF8FB;">
+    <children>
+        <Label text="✓"
+               style="-fx-font-size: 42px; -fx-text-fill: #C65D8D; -fx-font-weight: bold;"/>
+        <Label text="Added to Your Cart!"
+               style="-fx-font-size: 23px; -fx-text-fill: #A65378; -fx-font-weight: bold;"/>
+        <Label text="A little beauty is on its way to you."
+               style="-fx-font-size: 12px; -fx-text-fill: #A27A8D;"/>
+        <HBox alignment="CENTER_LEFT" spacing="16"
+              style="-fx-padding: 14; -fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #F3DCE6; -fx-border-radius: 15;">
+            <StackPane fx:id="addedPreview"
+                       minWidth="120" prefWidth="120" maxWidth="120"
+                       minHeight="145" prefHeight="145" maxHeight="145"
+                       style="-fx-background-color: #FFF1F7; -fx-background-radius: 12;"/>
+            <VBox alignment="CENTER_LEFT" spacing="12">
+                <Label fx:id="addedProductName" text="Makeup"
+                       wrapText="true"
+                       style="-fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: #694657;"/>
+                <Label fx:id="addedShade" text="Shade"
+                       style="-fx-text-fill: #967487;"/>
+                <Label fx:id="addedPrice" text="₱0.00"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #C45D89;"/>
+            </VBox>
+        </HBox>
+        <Label fx:id="addedCartCount" text="0 item(s) in your cart"
+               style="-fx-text-fill: #A27A8D;"/>
+    </children>
+</VBox>

@@ -1,0 +1,102 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml"
+      spacing="17"
+      alignment="CENTER_LEFT"
+      minHeight="145"
+      style="-fx-padding: 15;
+             -fx-background-color: white;
+             -fx-background-radius: 16;
+             -fx-border-color: #F2DCE5;
+             -fx-border-radius: 16;">
+
+    <children>
+
+        <StackPane minWidth="90"
+                   prefWidth="90"
+                   maxWidth="90"
+                   minHeight="100"
+                   prefHeight="100"
+                   maxHeight="100"
+                   style="-fx-background-color: #FFF0F6;
+                          -fx-background-radius: 12;">
+
+            <Label fx:id="itemSwatch"
+                   text="●"
+                   style="-fx-font-size: 54px;
+                          -fx-text-fill: #E9A6C0;"/>
+
+        </StackPane>
+
+        <VBox spacing="8"
+              alignment="CENTER_LEFT"
+              HBox.hgrow="ALWAYS">
+
+            <Label fx:id="itemName"
+                   text="Makeup"
+                   style="-fx-font-size: 16px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #674457;"/>
+
+            <Label fx:id="itemShade"
+                   text="Shade"
+                   style="-fx-font-size: 12px;
+                          -fx-text-fill: #987A88;"/>
+
+            <Label fx:id="itemSubtotal"
+                   text="₱0.00"
+                   style="-fx-font-size: 17px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #C45D89;"/>
+
+            <HBox alignment="CENTER_LEFT"
+                  spacing="12">
+
+                <Button fx:id="itemMinus"
+                        text="−"
+                        style="-fx-background-color: #FBE4ED;
+                               -fx-text-fill: #A65378;
+                               -fx-background-radius: 9;
+                               -fx-font-size: 18px;"/>
+
+                <Label fx:id="itemQuantity"
+                       text="1"
+                       minWidth="27"
+                       alignment="CENTER"
+                       style="-fx-font-size: 14px;
+                              -fx-text-fill: #674457;
+                              -fx-font-weight: bold;"/>
+
+                <Button fx:id="itemPlus"
+                        text="+"
+                        style="-fx-background-color: #FBE4ED;
+                               -fx-text-fill: #A65378;
+                               -fx-background-radius: 9;
+                               -fx-font-size: 18px;"/>
+
+                <Button fx:id="itemRemove"
+                        text="Remove"
+                        style="-fx-background-color: transparent;
+                               -fx-text-fill: #B86788;
+                               -fx-underline: true;
+                               -fx-cursor: hand;"/>
+
+            </HBox>
+
+            <Label fx:id="itemLimit"
+                   text="Maximum 20 per order"
+                   visible="false"
+                   managed="false"
+                   style="-fx-font-size: 11px;
+                          -fx-text-fill: #BA5B82;
+                          -fx-font-weight: bold;"/>
+
+        </VBox>
+
+    </children>
+
+</HBox>

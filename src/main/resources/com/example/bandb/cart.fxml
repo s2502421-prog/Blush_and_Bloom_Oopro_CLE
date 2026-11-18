@@ -1,0 +1,53 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           style="-fx-background-color: #FFF8FB;">
+    <children>
+        <VBox spacing="0">
+            <VBox spacing="7" style="-fx-padding: 25 28 16 28;">
+                <Label text="BLUSH &amp; BLOOM"
+                       style="-fx-font-size: 11px; -fx-text-fill: #BD6B91; -fx-font-weight: bold;"/>
+                <Label text="My Shopping Cart"
+                       style="-fx-font-size: 27px; -fx-text-fill: #994D72; -fx-font-weight: bold;"/>
+                <Label text="Your favorite beauty finds, all in one place."
+                       style="-fx-font-size: 13px; -fx-text-fill: #A78495;"/>
+            </VBox>
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+                        VBox.vgrow="ALWAYS"
+                        style="-fx-background: #FFF8FB; -fx-background-color: transparent;">
+                <content>
+                    <VBox fx:id="cartItems" spacing="12"
+                          style="-fx-padding: 12 28 15 28;"/>
+                </content>
+            </ScrollPane>
+            <VBox spacing="15"
+                  style="-fx-padding: 20 28 25 28; -fx-background-color: white; -fx-border-color: #F4DCE7; -fx-border-width: 1 0 0 0;">
+                <Label fx:id="cartMessage" visible="false"
+                       managed="false" wrapText="true"
+                       style="-fx-background-color: #FCE4ED; -fx-text-fill: #B94F7A; -fx-background-radius: 10; -fx-padding: 10;"/>
+                <HBox alignment="CENTER_LEFT" spacing="14">
+                    <Label fx:id="cartCount" text="0 item(s)"
+                           style="-fx-text-fill: #9B7688; -fx-font-size: 13px;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <VBox spacing="5">
+                        <Label text="Subtotal"
+                               style="-fx-text-fill: #7A5266; -fx-font-size: 15px; -fx-font-weight: bold;"/>
+                        <Label fx:id="cartTotal" text="₱0.00"
+                               style="-fx-text-fill: #AC527E; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    </VBox>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button fx:id="continueButton" text="Continue Shopping"
+                            style="-fx-background-color: #FBE1EC; -fx-text-fill: #A65378; -fx-background-radius: 11; -fx-font-weight: bold; -fx-padding: 12 17;"/>
+                    <Button fx:id="historyButton" text="Order History"
+                            style="-fx-background-color: #FBE1EC; -fx-text-fill: #A65378; -fx-background-radius: 11; -fx-font-weight: bold; -fx-padding: 12 17;"/>
+                    <Button fx:id="checkoutButton" text="Checkout"
+                            style="-fx-background-color: #D97DA5; -fx-text-fill: white; -fx-background-radius: 11; -fx-font-weight: bold; -fx-padding: 12 17;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </children>
+</StackPane>

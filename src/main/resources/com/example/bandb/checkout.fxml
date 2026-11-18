@@ -1,0 +1,48 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           prefWidth="470" prefHeight="520"
+           minWidth="470" minHeight="520"
+           maxWidth="470" maxHeight="520"
+           style="-fx-background-color: #FFF8FB; -fx-background-radius: 20;">
+    <children>
+        <Pane fx:id="petalsLayer"
+              mouseTransparent="true" pickOnBounds="false"
+              prefWidth="470" prefHeight="520"/>
+        <VBox alignment="CENTER" spacing="17" maxWidth="440"
+              style="-fx-padding: 25; -fx-background-color: transparent;">
+            <Label text="♥"
+                   style="-fx-text-fill: #C45D89; -fx-font-size: 44px;"/>
+            <Label fx:id="checkoutTitle" text="Ready to Bloom?"
+                   wrapText="true"
+                   style="-fx-text-fill: #994D72; -fx-font-size: 25px; -fx-font-weight: bold;"/>
+            <Label fx:id="checkoutDescription"
+                   text="Confirm your order to continue shopping.&#10;You can order the same makeup again anytime."
+                   wrapText="true" alignment="CENTER"
+                   textAlignment="CENTER"
+                   style="-fx-text-fill: #9C7A8B; -fx-font-size: 13px;"/>
+            <VBox alignment="CENTER" spacing="8"
+                  maxWidth="Infinity"
+                  style="-fx-padding: 20; -fx-background-color: #FCE9F1; -fx-background-radius: 15;">
+                <Label text="YOUR ORDER TOTAL"
+                       style="-fx-text-fill: #A78495; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+                <Label fx:id="checkoutAmount" text="₱0.00"
+                       style="-fx-text-fill: #C45D89; -fx-font-size: 29px; -fx-font-weight: bold;"/>
+                <Label fx:id="checkoutCount" text="0 item(s)"
+                       style="-fx-text-fill: #A78495; -fx-font-size: 12px;"/>
+            </VBox>
+            <Label fx:id="checkoutError" wrapText="true"
+                   visible="false" managed="false"
+                   style="-fx-text-fill: #B94F7A; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+            <Button fx:id="placeOrderButton" text="Place Order"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: #D97DA5; -fx-text-fill: white; -fx-background-radius: 11; -fx-font-weight: bold; -fx-padding: 12 20;"/>
+            <Button fx:id="checkoutBackButton" text="Back to My Cart"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: #FBE1EC; -fx-text-fill: #A65378; -fx-background-radius: 11; -fx-font-weight: bold; -fx-padding: 12 20;"/>
+        </VBox>
+    </children>
+</StackPane>
