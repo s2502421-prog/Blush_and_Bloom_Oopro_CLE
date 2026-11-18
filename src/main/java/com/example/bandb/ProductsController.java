@@ -1,21 +1,25 @@
 
 package com.example.bandb;
 
+import com.example.bandb.model.Makeup;
+import com.example.bandb.model.Product;
+import com.example.bandb.service.ProductData;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 public class ProductsController {
 
@@ -23,175 +27,309 @@ public class ProductsController {
     @FXML private Label skinToneLabel;
     @FXML private Label productCountLabel;
     @FXML private Button cartCountButton;
-
     @FXML private Button allButton;
     @FXML private Button foundationButton;
     @FXML private Button blushButton;
     @FXML private Button lipstickButton;
+    @FXML private TextField searchField;
 
-    private final List<ShopProduct> products =
+    private final ArrayList<Product> products =
             new ArrayList<>();
 
     private String selectedSkinTone = "Medium";
     private String activeCategory = "All";
-
-    private static class ShopProduct {
-
-        final String category;
-        final String name;
-        final String shade;
-        final String hexColor;
-        final String recommendedTone;
-        final double price;
-
-        ShopProduct(
-                String category,
-                String name,
-                String shade,
-                String hexColor,
-                String recommendedTone,
-                double price
-        ) {
-            this.category = category;
-            this.name = name;
-            this.shade = shade;
-            this.hexColor = hexColor;
-            this.recommendedTone = recommendedTone;
-            this.price = price;
-        }
-    }
+    private boolean searchInstalled = false;
 
     @FXML
     public void initialize() {
 
-        String tone =
-                SkinToneController.getSelectedSkinTone();
+        String tone = SkinToneController.getSelectedSkinTone();
 
         if (tone != null && !tone.isBlank()) {
             selectedSkinTone = tone;
         }
 
-        skinToneLabel.setText(
-                "Your skin tone: " + selectedSkinTone
+        if (skinToneLabel != null) {
+            skinToneLabel.setText(
+                    "Your skin tone: " + selectedSkinTone
+            );
+        }
+
+        refreshShop();
+
+        if (searchField != null) {
+            setupSearchField(searchField);
+            searchInstalled = true;
+        } else {
+            Platform.runLater(this::installSearchBar);
+        }
+
+        Platform.runLater(this::updateCartCount);
+
+        if (productGrid != null) {
+            productGrid.sceneProperty().addListener(
+                    (observable, oldScene, newScene) -> {
+                        if (newScene != null) {
+                            Platform.runLater(this::updateCartCount);
+                        }
+                    }
+            );
+        }
+    }
+
+    private void setupSearchField(TextField field) {
+
+        field.setPromptText(
+                "Search makeup, category, or shade..."
         );
 
-        loadProducts();
-        displayProducts("All");
-        updateCartCount();
+        field.setMinWidth(350);
+        field.setPrefWidth(650);
+        field.setMaxWidth(750);
+        field.setPrefHeight(48);
+
+        field.setStyle(
+                "-fx-background-color: white;" +
+                        "-fx-background-radius: 26;" +
+                        "-fx-border-color: #E9A6C0;" +
+                        "-fx-border-width: 1.5;" +
+                        "-fx-border-radius: 26;" +
+                        "-fx-padding: 12 20;" +
+                        "-fx-font-size: 14px;" +
+                        "-fx-text-fill: #674457;" +
+                        "-fx-prompt-text-fill: #B79BA8;"
+        );
+
+        field.textProperty().addListener(
+                (observable, oldValue, newValue) ->
+                        displayProducts(activeCategory)
+        );
     }
 
-    private void loadProducts() {
+    private void installSearchBar() {
+
+        if (searchInstalled || productGrid == null) {
+            return;
+        }
+
+        if (productGrid.getScene() == null) {
+            productGrid.sceneProperty().addListener(
+                    (observable, oldScene, newScene) -> {
+                        if (newScene != null) {
+                            Platform.runLater(this::installSearchBar);
+                        }
+                    }
+            );
+            return;
+        }
+
+        Label categoryTitle = findCategoryTitle(
+                productGrid.getScene().getRoot()
+        );
+
+        if (categoryTitle == null) {
+            return;
+        }
+
+        Node anchor = categoryTitle;
+        Parent parent = anchor.getParent();
+
+        while (parent != null && !(parent instanceof VBox)) {
+            anchor = parent;
+            parent = parent.getParent();
+        }
+
+        if (!(parent instanceof VBox)) {
+            return;
+        }
+
+        VBox container = (VBox) parent;
+
+        int position = container.getChildren().indexOf(anchor);
+
+        if (position < 0) {
+            return;
+        }
+
+        searchField = new TextField();
+        setupSearchField(searchField);
+
+        Label searchTitle = new Label("Find Your Beauty");
+
+        searchTitle.setStyle(
+                "-fx-text-fill: #A65378;" +
+                        "-fx-font-size: 20px;" +
+                        "-fx-font-weight: bold;"
+        );
+
+        Label searchIcon = new Label("⌕");
+
+        searchIcon.setStyle(
+                "-fx-text-fill: #C45D89;" +
+                        "-fx-font-size: 28px;" +
+                        "-fx-font-weight: bold;"
+        );
+
+        HBox searchRow = new HBox(
+                14,
+                searchIcon,
+                searchField
+        );
+
+        searchRow.setAlignment(Pos.CENTER_LEFT);
+
+        VBox searchSection = new VBox(
+                13,
+                searchTitle,
+                searchRow
+        );
+
+        searchSection.setPadding(
+                new Insets(10, 0, 28, 0)
+        );
+
+        searchSection.setMaxWidth(Double.MAX_VALUE);
+
+        container.getChildren().add(
+                position,
+                searchSection
+        );
+
+        searchInstalled = true;
+    }
+
+    private Label findCategoryTitle(Node node) {
+
+        if (node instanceof Label) {
+
+            Label label = (Label) node;
+
+            if (label.getText() != null
+                    && label.getText().trim()
+                    .equalsIgnoreCase("Shop by Category")) {
+                return label;
+            }
+        }
+
+        if (node instanceof Parent) {
+
+            Parent parent = (Parent) node;
+
+            for (Node child : parent.getChildrenUnmodifiable()) {
+
+                Label found = findCategoryTitle(child);
+
+                if (found != null) {
+                    return found;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private void refreshShop() {
 
         products.clear();
+        products.addAll(ProductData.getAllProducts());
 
-        // GLOW FOUNDATION
-        add("Foundation", "Glow Foundation",
-                "Porcelain", "#F4D9C9", "Fair", 399);
-
-        add("Foundation", "Glow Foundation",
-                "Ivory", "#E8C3A6", "Light", 399);
-
-        add("Foundation", "Glow Foundation",
-                "Natural Beige", "#C8956D", "Medium", 399);
-
-        add("Foundation", "Glow Foundation",
-                "Warm Honey", "#B77747", "Tan", 399);
-
-        add("Foundation", "Glow Foundation",
-                "Cocoa", "#805037", "Deep", 399);
-
-        add("Foundation", "Glow Foundation",
-                "Espresso", "#4E3028", "Rich Deep", 399);
-
-        // DREAMY BLUSH
-        add("Blush", "Dreamy Blush",
-                "Baby Pink", "#F5A9C0", "Fair", 249);
-
-        add("Blush", "Dreamy Blush",
-                "Peach Pink", "#F5A38E", "Light", 249);
-
-        add("Blush", "Dreamy Blush",
-                "Coral", "#ED846D", "Medium", 249);
-
-        add("Blush", "Dreamy Blush",
-                "Terracotta", "#B96750", "Tan", 249);
-
-        add("Blush", "Dreamy Blush",
-                "Berry", "#A44266", "Deep", 249);
-
-        add("Blush", "Dreamy Blush",
-                "Plum", "#753C65", "Rich Deep", 249);
-
-        // BLOOM KISS LIPSTICK
-        add("Lipstick", "Bloom Kiss Lipstick",
-                "Soft Rose", "#C97987", "Fair", 199);
-
-        add("Lipstick", "Bloom Kiss Lipstick",
-                "Pink Nude", "#B76E78", "Light", 199);
-
-        add("Lipstick", "Bloom Kiss Lipstick",
-                "Rosewood", "#96535B", "Medium", 199);
-
-        add("Lipstick", "Bloom Kiss Lipstick",
-                "Caramel Nude", "#8E4E3C", "Tan", 199);
-
-        add("Lipstick", "Bloom Kiss Lipstick",
-                "Burgundy", "#70283E", "Deep", 199);
-
-        add("Lipstick", "Bloom Kiss Lipstick",
-                "Deep Wine", "#512438", "Rich Deep", 199);
-    }
-
-    private void add(
-            String category,
-            String name,
-            String shade,
-            String color,
-            String tone,
-            double price
-    ) {
-        products.add(new ShopProduct(
-                category, name, shade,
-                color, tone, price
-        ));
+        displayProducts(activeCategory);
+        updateCartCount();
     }
 
     private void displayProducts(String category) {
 
         activeCategory = category;
+
+        if (productGrid == null) {
+            return;
+        }
+
         productGrid.getChildren().clear();
+
+        String searchText = "";
+
+        if (searchField != null
+                && searchField.getText() != null) {
+
+            searchText = searchField.getText()
+                    .trim()
+                    .toLowerCase(Locale.ROOT);
+        }
 
         int count = 0;
 
-        for (ShopProduct product : products) {
+        for (Product product : products) {
 
-            if (!category.equals("All")
-                    && !product.category.equals(category)) {
+            if (!(product instanceof Makeup)) {
+                continue;
+            }
+
+            Makeup makeup = (Makeup) product;
+
+            boolean categoryMatches =
+                    category.equals("All")
+                            || category.equals(makeup.getCategory());
+
+            String searchableText = (
+                    makeup.getName() + " " +
+                            makeup.getShade() + " " +
+                            makeup.getCategory() + " " +
+                            makeup.getBrand() + " " +
+                            makeup.getRecommendedSkinTone()
+            ).toLowerCase(Locale.ROOT);
+
+            boolean searchMatches =
+                    searchText.isEmpty()
+                            || searchableText.contains(searchText);
+
+            if (!categoryMatches || !searchMatches) {
                 continue;
             }
 
             productGrid.getChildren().add(
-                    createProductCard(product)
+                    createProductCard(makeup)
             );
 
             count++;
         }
 
-        productCountLabel.setText(
-                count + " shades available"
-        );
+        if (productCountLabel != null) {
+
+            productCountLabel.setText(
+                    count == 0
+                            ? "No matching products found"
+                            : count + " shades available"
+            );
+        }
+
+        if (count == 0) {
+
+            Label emptyLabel = new Label(
+                    "No makeup found. Try another search."
+            );
+
+            emptyLabel.setStyle(
+                    "-fx-text-fill: #A78495;" +
+                            "-fx-font-size: 15px;" +
+                            "-fx-padding: 30;"
+            );
+
+            productGrid.getChildren().add(emptyLabel);
+        }
 
         updateFilterButtons();
+        updateCartCount();
     }
 
-    private VBox createProductCard(ShopProduct product) {
+    private VBox createProductCard(Makeup product) {
 
         boolean recommended =
-                product.recommendedTone.equalsIgnoreCase(
-                        selectedSkinTone
-                );
+                product.getRecommendedSkinTone()
+                        .equalsIgnoreCase(selectedSkinTone);
 
         VBox card = new VBox(9);
+
         card.setAlignment(Pos.TOP_CENTER);
         card.setPadding(new Insets(14));
 
@@ -203,22 +341,18 @@ public class ProductsController {
         card.setMinHeight(455);
         card.setMaxHeight(455);
 
-        String borderColor =
-                recommended ? "#D97DA5" : "#F2DAE4";
-
         card.setStyle(
                 "-fx-background-color: white;" +
                         "-fx-background-radius: 18;" +
-                        "-fx-border-color: " + borderColor + ";" +
+                        "-fx-border-color: " +
+                        (recommended ? "#D97DA5" : "#F2DAE4") + ";" +
                         "-fx-border-width: " +
                         (recommended ? "2" : "1") + ";" +
                         "-fx-border-radius: 18;"
         );
 
         Label recommendation = new Label(
-                recommended
-                        ? "♥ RECOMMENDED FOR YOU"
-                        : " "
+                recommended ? "♥ RECOMMENDED FOR YOU" : " "
         );
 
         recommendation.setStyle(
@@ -227,23 +361,23 @@ public class ProductsController {
                         "-fx-text-fill: #C45D89;"
         );
 
-        StackPane illustrationArea = new StackPane();
+        StackPane imageArea = new StackPane();
 
-        illustrationArea.setPrefSize(190, 220);
-        illustrationArea.setMinSize(190, 220);
-        illustrationArea.setMaxSize(190, 220);
+        imageArea.setPrefSize(190, 220);
+        imageArea.setMinSize(190, 220);
+        imageArea.setMaxSize(190, 220);
 
-        illustrationArea.setStyle(
+        imageArea.setStyle(
                 "-fx-background-color: #FFF5F9;" +
                         "-fx-background-radius: 14;"
         );
 
-        illustrationArea.getChildren().add(
+        imageArea.getChildren().add(
                 createIllustration(product)
         );
 
         Label categoryLabel = new Label(
-                product.category.toUpperCase()
+                product.getCategory().toUpperCase()
         );
 
         categoryLabel.setStyle(
@@ -252,38 +386,39 @@ public class ProductsController {
                         "-fx-font-weight: bold;"
         );
 
-        Label nameLabel = new Label(product.name);
+        Label name = new Label(product.getName());
+        name.setWrapText(true);
 
-        nameLabel.setStyle(
+        name.setStyle(
                 "-fx-font-size: 15px;" +
                         "-fx-font-weight: bold;" +
                         "-fx-text-fill: #563C49;"
         );
 
-        Label shadeLabel = new Label(
-                "Shade: " + product.shade
+        Circle color = new Circle(
+                7,
+                Color.web(product.getShadeColor())
         );
 
-        shadeLabel.setStyle(
+        color.setStroke(Color.web("#E4C7D3"));
+
+        Label shade = new Label(
+                "Shade: " + product.getShade()
+        );
+
+        shade.setStyle(
                 "-fx-font-size: 12px;" +
                         "-fx-text-fill: #846A76;"
         );
 
-        Circle swatch = new Circle(7);
-        swatch.setFill(Color.web(product.hexColor));
-        swatch.setStroke(Color.web("#E4C7D3"));
-
-        HBox shadeRow = new HBox(
-                7, swatch, shadeLabel
-        );
-
+        HBox shadeRow = new HBox(7, color, shade);
         shadeRow.setAlignment(Pos.CENTER);
 
-        Label priceLabel = new Label(
-                String.format("₱%.2f", product.price)
+        Label price = new Label(
+                String.format("₱%,.2f", product.getPrice())
         );
 
-        priceLabel.setStyle(
+        price.setStyle(
                 "-fx-font-size: 17px;" +
                         "-fx-font-weight: bold;" +
                         "-fx-text-fill: #C45D89;"
@@ -293,7 +428,6 @@ public class ProductsController {
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
         Button addButton = new Button("Add to Cart");
-
         addButton.setMaxWidth(Double.MAX_VALUE);
         addButton.setPrefHeight(38);
 
@@ -305,17 +439,15 @@ public class ProductsController {
                         "-fx-cursor: hand;"
         );
 
-        addButton.setOnAction(event ->
-                addToCart(product)
-        );
+        addButton.setOnAction(e -> addToCart(product));
 
         card.getChildren().addAll(
                 recommendation,
-                illustrationArea,
+                imageArea,
                 categoryLabel,
-                nameLabel,
+                name,
                 shadeRow,
-                priceLabel,
+                price,
                 spacer,
                 addButton
         );
@@ -323,37 +455,33 @@ public class ProductsController {
         return card;
     }
 
-    private Node createIllustration(ShopProduct product) {
+    private Node createIllustration(Makeup product) {
 
-        switch (product.category) {
+        switch (product.getCategory()) {
 
             case "Foundation":
+
                 FoundationPreview foundation =
                         new FoundationPreview();
 
-                foundation.setShadeColor(
-                        product.hexColor
-                );
+                foundation.setShadeColor(product.getShadeColor());
 
                 return foundation;
 
             case "Blush":
-                BlushPreview blush =
-                        new BlushPreview();
 
-                blush.setShadeColor(
-                        product.hexColor
-                );
+                BlushPreview blush = new BlushPreview();
+
+                blush.setShadeColor(product.getShadeColor());
 
                 return blush;
 
             case "Lipstick":
+
                 LipstickPreview lipstick =
                         new LipstickPreview();
 
-                lipstick.setShadeColor(
-                        product.hexColor
-                );
+                lipstick.setShadeColor(product.getShadeColor());
 
                 return lipstick;
 
@@ -362,42 +490,296 @@ public class ProductsController {
         }
     }
 
-    private void addToCart(ShopProduct product) {
+    private void addToCart(Makeup product) {
 
-        ShoppingCart.addItem(
-                product.category,
-                product.name,
-                product.shade,
-                product.price
+        try {
+
+            if (!ShoppingCart.isLoggedIn()) {
+
+                showWarning(
+                        "Login Required",
+                        "Please log in before adding products."
+                );
+
+                return;
+            }
+
+            boolean added = ShoppingCart.addItem(
+                    product.getCategory(),
+                    product.getName(),
+                    product.getShade(),
+                    product.getPrice()
+            );
+
+            updateCartCount();
+
+            if (!added) {
+
+                showWarning(
+                        "Quantity Limit",
+                        "You can order up to 20 units of each shade per order."
+                );
+
+                return;
+            }
+
+            showAddedPopup(product);
+            updateCartCount();
+
+        } catch (RuntimeException exception) {
+
+            showWarning(
+                    "Unable to Add Product",
+                    exception.getMessage() == null
+                            ? "Please try again."
+                            : exception.getMessage()
+            );
+        }
+    }
+
+    private void showAddedPopup(Makeup product) {
+
+        Dialog<ButtonType> dialog = new Dialog<>();
+
+        dialog.setTitle("Blush & Bloom");
+
+        if (productGrid != null
+                && productGrid.getScene() != null) {
+
+            dialog.initOwner(
+                    productGrid.getScene().getWindow()
+            );
+        }
+
+        ButtonType continueType = new ButtonType(
+                "Continue Shopping",
+                ButtonBar.ButtonData.CANCEL_CLOSE
         );
+
+        ButtonType cartType = new ButtonType(
+                "View My Cart",
+                ButtonBar.ButtonData.OK_DONE
+        );
+
+        DialogPane pane = dialog.getDialogPane();
+
+        pane.getButtonTypes().addAll(
+                continueType,
+                cartType
+        );
+
+        pane.setStyle(
+                "-fx-background-color: #FFF8FB;"
+        );
+
+        StackPane icon = new StackPane();
+
+        icon.setMinSize(75, 75);
+        icon.setMaxSize(75, 75);
+
+        icon.setStyle(
+                "-fx-background-color: #F9D5E5;" +
+                        "-fx-background-radius: 100;"
+        );
+
+        Label check = new Label("✓");
+
+        check.setStyle(
+                "-fx-font-size: 42px;" +
+                        "-fx-text-fill: #C65D8D;" +
+                        "-fx-font-weight: bold;"
+        );
+
+        icon.getChildren().add(check);
+
+        Label title = new Label("Added to Your Cart!");
+
+        title.setStyle(
+                "-fx-font-size: 23px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-text-fill: #A65378;"
+        );
+
+        Label subtitle = new Label(
+                "A little beauty is on its way to you."
+        );
+
+        subtitle.setStyle(
+                "-fx-font-size: 12px;" +
+                        "-fx-text-fill: #A27A8D;"
+        );
+
+        Label name = new Label(product.getName());
+
+        name.setStyle(
+                "-fx-font-size: 17px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-text-fill: #694657;"
+        );
+
+        Circle swatch = new Circle(
+                12,
+                Color.web(product.getShadeColor())
+        );
+
+        Label shade = new Label(
+                "Shade: " + product.getShade()
+        );
+
+        shade.setStyle("-fx-text-fill: #967487;");
+
+        HBox shadeRow = new HBox(
+                9,
+                swatch,
+                shade
+        );
+
+        shadeRow.setAlignment(Pos.CENTER_LEFT);
+
+        Label price = new Label(
+                String.format("₱%,.2f", product.getPrice())
+        );
+
+        price.setStyle(
+                "-fx-font-size: 20px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-text-fill: #C45D89;"
+        );
+
+        VBox details = new VBox(
+                12,
+                name,
+                shadeRow,
+                price
+        );
+
+        details.setAlignment(Pos.CENTER_LEFT);
+
+        Node illustration = createIllustration(product);
+
+        illustration.setScaleX(0.6);
+        illustration.setScaleY(0.6);
+
+        StackPane preview = new StackPane(illustration);
+
+        preview.setMinSize(120, 145);
+        preview.setPrefSize(120, 145);
+        preview.setMaxSize(120, 145);
+
+        preview.setStyle(
+                "-fx-background-color: #FFF1F7;" +
+                        "-fx-background-radius: 12;"
+        );
+
+        HBox productRow = new HBox(
+                16,
+                preview,
+                details
+        );
+
+        productRow.setAlignment(Pos.CENTER_LEFT);
+        productRow.setPadding(new Insets(14));
+
+        productRow.setStyle(
+                "-fx-background-color: white;" +
+                        "-fx-background-radius: 15;" +
+                        "-fx-border-color: #F3DCE6;" +
+                        "-fx-border-radius: 15;"
+        );
+
+        Label count = new Label(
+                ShoppingCart.getTotalQuantity() +
+                        " item(s) in your cart"
+        );
+
+        count.setStyle("-fx-text-fill: #A27A8D;");
+
+        VBox content = new VBox(
+                14,
+                icon,
+                title,
+                subtitle,
+                productRow,
+                count
+        );
+
+        content.setAlignment(Pos.CENTER);
+        content.setPadding(new Insets(25));
+        content.setPrefWidth(440);
+
+        content.setStyle(
+                "-fx-background-color: #FFF8FB;"
+        );
+
+        pane.setContent(content);
+
+        Button continueButton =
+                (Button) pane.lookupButton(continueType);
+
+        continueButton.setStyle(
+                "-fx-background-color: #FCE3ED;" +
+                        "-fx-text-fill: #A65378;" +
+                        "-fx-background-radius: 10;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-padding: 11 17;"
+        );
+
+        Button cartButton =
+                (Button) pane.lookupButton(cartType);
+
+        cartButton.setStyle(
+                "-fx-background-color: #D97DA5;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-background-radius: 10;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-padding: 11 17;"
+        );
+
+        Optional<ButtonType> selected =
+                dialog.showAndWait();
 
         updateCartCount();
 
-        Alert alert = new Alert(
-                Alert.AlertType.INFORMATION
-        );
+        if (selected.isPresent()
+                && selected.get() == cartType) {
+            handleCart();
+        }
+    }
+
+    private void showWarning(String title, String message) {
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+
+        if (productGrid != null
+                && productGrid.getScene() != null) {
+
+            alert.initOwner(
+                    productGrid.getScene().getWindow()
+            );
+        }
 
         alert.setTitle("Blush & Bloom");
-        alert.setHeaderText("Added to Cart! ♥");
-
-        alert.setContentText(
-                product.name + "\n" +
-                        "Shade: " + product.shade + "\n" +
-                        String.format(
-                                "Price: ₱%.2f",
-                                product.price
-                        )
-        );
-
+        alert.setHeaderText(title);
+        alert.setContentText(message);
         alert.showAndWait();
+
+        updateCartCount();
     }
 
     private void updateCartCount() {
 
+        if (cartCountButton == null) {
+            return;
+        }
+
+        int quantity = 0;
+
+        if (ShoppingCart.isLoggedIn()) {
+            quantity = ShoppingCart.getTotalQuantity();
+        }
+
         cartCountButton.setText(
-                "My Cart (" +
-                        ShoppingCart.getTotalQuantity() +
-                        ")"
+                "My Cart (" + quantity + ")"
         );
     }
 
@@ -409,13 +791,13 @@ public class ProductsController {
         styleFilter(lipstickButton, "Lipstick");
     }
 
-    private void styleFilter(
-            Button button,
-            String category
-    ) {
+    private void styleFilter(Button button, String category) {
 
-        boolean selected =
-                activeCategory.equals(category);
+        if (button == null) {
+            return;
+        }
+
+        boolean selected = activeCategory.equals(category);
 
         button.setStyle(
                 "-fx-background-color: " +
@@ -462,44 +844,40 @@ public class ProductsController {
     @FXML
     private void handleCart() {
 
-        Alert alert = new Alert(
-                Alert.AlertType.INFORMATION
-        );
-
-        alert.setTitle("Blush & Bloom");
-        alert.setHeaderText("Your Shopping Cart");
-
-        if (ShoppingCart.getItems().isEmpty()) {
-
-            alert.setContentText(
-                    "Your cart is currently empty."
-            );
-
-        } else {
-
-            StringBuilder details =
-                    new StringBuilder();
-
-            for (ShoppingCart.CartItem item :
-                    ShoppingCart.getItems()) {
-
-                details.append(item.getProductName())
-                        .append(" - ")
-                        .append(item.getShade())
-                        .append(" x")
-                        .append(item.getQuantity())
-                        .append("\n");
-            }
-
-            details.append("\nTotal: ")
-                    .append(String.format(
-                            "₱%.2f",
-                            ShoppingCart.getTotalPrice()
-                    ));
-
-            alert.setContentText(details.toString());
+        if (productGrid == null
+                || productGrid.getScene() == null) {
+            return;
         }
 
-        alert.showAndWait();
+        if (!ShoppingCart.isLoggedIn()) {
+
+            showWarning(
+                    "Login Required",
+                    "Please log in to view your cart."
+            );
+
+            return;
+        }
+
+        try {
+
+            CartWindow.showForOrder(
+                    productGrid.getScene().getWindow()
+            );
+
+            refreshShop();
+
+        } catch (RuntimeException exception) {
+
+            showWarning(
+                    "Cart Error",
+                    exception.getMessage() == null
+                            ? "Unable to open your cart."
+                            : exception.getMessage()
+            );
+
+        } finally {
+            updateCartCount();
+        }
     }
 }

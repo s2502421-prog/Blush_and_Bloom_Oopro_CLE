@@ -1,3 +1,4 @@
+
 package com.example.bandb;
 
 public class Customer {
@@ -7,8 +8,12 @@ public class Customer {
     private String email;
     private String password;
 
-    public Customer(String fullName, String username,
-                    String email, String password) {
+    public Customer(
+            String fullName,
+            String username,
+            String email,
+            String password
+    ) {
         this.fullName = fullName;
         this.username = username;
         this.email = email;

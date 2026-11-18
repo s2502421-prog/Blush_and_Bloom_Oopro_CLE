@@ -3,15 +3,17 @@ package com.example.bandb.model;
 
 public abstract class Product {
 
-    private int id;
+    private final int id;
     private String name;
     private double price;
     private int stock;
 
-    public Product(int id, String name,
-                   double price, int stock) {
+    public Product(int id, String name, double price, int stock) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("Invalid product ID.");
+        }
 
-        setId(id);
+        this.id = id;
         setName(name);
         setPrice(price);
         setStock(stock);
@@ -19,15 +21,6 @@ public abstract class Product {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        if (id <= 0) {
-            throw new IllegalArgumentException(
-                    "Product ID must be greater than zero."
-            );
-        }
-        this.id = id;
     }
 
     public String getName() {
@@ -40,7 +33,7 @@ public abstract class Product {
                     "Product name cannot be empty."
             );
         }
-        this.name = name.trim();
+        this.name = name;
     }
 
     public double getPrice() {

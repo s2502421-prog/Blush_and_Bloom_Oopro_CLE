@@ -5,4 +5,6 @@ module com.example.bandb {
 
     opens com.example.bandb to javafx.fxml;
     exports com.example.bandb;
+    exports com.example.bandb.service;
+    opens com.example.bandb.service to javafx.fxml;
 }

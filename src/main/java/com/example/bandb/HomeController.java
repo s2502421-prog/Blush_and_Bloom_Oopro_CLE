@@ -1,8 +1,12 @@
 
 package com.example.bandb;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -23,13 +27,17 @@ public class HomeController {
     @FXML private StackPane bannerContainer;
     @FXML private ImageView bannerImage;
 
+    @FXML private Button cartCountButton;
+
     @FXML
     public void initialize() {
 
         if (bannerImage != null && bannerContainer != null) {
+
             bannerImage.fitWidthProperty().bind(
                     bannerContainer.widthProperty()
             );
+
             bannerImage.fitHeightProperty().bind(
                     bannerContainer.heightProperty()
             );
@@ -49,6 +57,7 @@ public class HomeController {
         String lipstickColor;
 
         switch (tone) {
+
             case "Fair":
                 foundationName = "Porcelain";
                 foundationColor = "#F4D9C9";
@@ -107,85 +116,243 @@ public class HomeController {
         if (skinToneLabel != null) {
             skinToneLabel.setText(tone);
         }
-        if (foundationShade != null) {
-            foundationShade.setText("Shade: " + foundationName);
-        }
-        if (blushShade != null) {
-            blushShade.setText("Shade: " + blushName);
-        }
-        if (lipstickShade != null) {
-            lipstickShade.setText("Shade: " + lipstickName);
-        }
+
         if (beautyMessage != null) {
             beautyMessage.setText(
-                    "Beautiful shades selected for your "
-                            + tone + " skin tone."
+                    "Beautiful shades selected for your " +
+                            tone + " skin tone."
+            );
+        }
+
+        if (foundationShade != null) {
+            foundationShade.setText(
+                    "Shade: " + foundationName
+            );
+        }
+
+        if (blushShade != null) {
+            blushShade.setText(
+                    "Shade: " + blushName
+            );
+        }
+
+        if (lipstickShade != null) {
+            lipstickShade.setText(
+                    "Shade: " + lipstickName
             );
         }
 
         if (foundationContainer != null) {
-            FoundationPreview foundation = new FoundationPreview();
+
+            FoundationPreview foundation =
+                    new FoundationPreview();
+
             foundation.setShadeColor(foundationColor);
-            foundationContainer.getChildren().setAll(foundation);
+
+            foundationContainer.getChildren().setAll(
+                    foundation
+            );
         }
 
         if (blushContainer != null) {
+
             BlushPreview blush = new BlushPreview();
+
             blush.setShadeColor(blushColor);
-            blushContainer.getChildren().setAll(blush);
+
+            blushContainer.getChildren().setAll(
+                    blush
+            );
         }
 
         if (lipstickContainer != null) {
-            LipstickPreview lipstick = new LipstickPreview();
+
+            LipstickPreview lipstick =
+                    new LipstickPreview();
+
             lipstick.setShadeColor(lipstickColor);
-            lipstickContainer.getChildren().setAll(lipstick);
+
+            lipstickContainer.getChildren().setAll(
+                    lipstick
+            );
         }
+
+        setupCartCounter();
     }
 
-    @FXML
-    private void handleProducts() {
+    private void setupCartCounter() {
 
-        Alert test = new Alert(Alert.AlertType.INFORMATION);
-        test.setTitle("Navigation Test");
-        test.setHeaderText("Shop Products button clicked!");
-        test.setContentText(
-                "JavaFX received your click. Press OK to open the shop."
+        updateCartCount();
+
+        Node anchor = getHomeAnchor();
+
+        if (anchor == null) {
+            return;
+        }
+
+        anchor.sceneProperty().addListener(
+                (observable, oldScene, newScene) -> {
+
+                    if (newScene != null) {
+                        Platform.runLater(this::updateCartCount);
+                    }
+                }
         );
-        test.showAndWait();
 
-        try {
-            SceneManager.switchScene("products.fxml");
-        } catch (IOException | RuntimeException e) {
-            e.printStackTrace();
-
-            Alert error = new Alert(Alert.AlertType.ERROR);
-            error.setTitle("Shop Products Error");
-            error.setHeaderText("Cannot open products.fxml");
-            error.setContentText(e.toString());
-            error.showAndWait();
+        if (anchor.getScene() != null) {
+            Platform.runLater(this::updateCartCount);
         }
     }
 
+    private Node getHomeAnchor() {
+
+        if (bannerContainer != null) {
+            return bannerContainer;
+        }
+
+        if (skinToneLabel != null) {
+            return skinToneLabel;
+        }
+
+        if (foundationContainer != null) {
+            return foundationContainer;
+        }
+
+        if (beautyMessage != null) {
+            return beautyMessage;
+        }
+
+        if (cartCountButton != null) {
+            return cartCountButton;
+        }
+
+        return null;
+    }
+
+    private Scene getHomeScene() {
+
+        Node anchor = getHomeAnchor();
+
+        if (anchor == null) {
+            return null;
+        }
+
+        return anchor.getScene();
+    }
+
+    private void updateCartCount() {
+
+        int count = 0;
+
+        if (ShoppingCart.isLoggedIn()) {
+            count = ShoppingCart.getTotalQuantity();
+        }
+
+        Button cartButton = cartCountButton;
+
+        if (cartButton == null) {
+
+            Scene scene = getHomeScene();
+
+            if (scene != null) {
+                cartButton = findCartButton(
+                        scene.getRoot()
+                );
+            }
+        }
+
+        if (cartButton != null) {
+            cartButton.setText(
+                    "My Cart (" + count + ")"
+            );
+        }
+    }
+
+    private Button findCartButton(Parent parent) {
+
+        for (Node child :
+                parent.getChildrenUnmodifiable()) {
+
+            if (child instanceof Button) {
+
+                Button button = (Button) child;
+
+                String text = button.getText();
+
+                if (text != null &&
+                        text.trim().matches(
+                                "(?i)My Cart(?:\\s*\\(\\d+\\))?"
+                        )) {
+
+                    return button;
+                }
+            }
+
+            if (child instanceof Parent) {
+
+                Button found = findCartButton(
+                        (Parent) child
+                );
+
+                if (found != null) {
+                    return found;
+                }
+            }
+        }
+
+        return null;
+    }
+
     @FXML
-    private void handleShopProducts() {
+    private void handleProducts() throws IOException {
+
+        SceneManager.switchScene(
+                "products.fxml"
+        );
+    }
+
+    @FXML
+    private void handleShopProducts() throws IOException {
+
         handleProducts();
     }
 
     @FXML
-    private void handleShopNow() {
+    private void handleShopNow() throws IOException {
+
         handleProducts();
     }
 
     @FXML
     private void handleCart() {
-        new Alert(
-                Alert.AlertType.INFORMATION,
-                "Your dedicated cart page is not ready yet."
-        ).showAndWait();
+
+        if (!ShoppingCart.isLoggedIn()) {
+            return;
+        }
+
+        Scene scene = getHomeScene();
+
+        if (scene == null) {
+            return;
+        }
+
+        try {
+
+            CartWindow.show(
+                    scene.getWindow()
+            );
+
+        } finally {
+
+            updateCartCount();
+        }
     }
 
     @FXML
     private void handleLogout() throws IOException {
-        SceneManager.switchScene("login.fxml");
+
+        SceneManager.switchScene(
+                "login.fxml"
+        );
     }
 }

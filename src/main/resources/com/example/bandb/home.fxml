@@ -1,8 +1,8 @@
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.bandb.HomeController"
@@ -90,10 +90,16 @@
                                minHeight="260"
                                maxHeight="260"
                                style="-fx-background-color: #F9DFE9;
-                                      -fx-background-radius: 20;
-                                      -fx-background-image: url('beauty-banner.jpg');
-                                      -fx-background-size: cover;
-                                      -fx-background-position: center;">
+                                      -fx-background-radius: 20;">
+
+                        <ImageView fx:id="bannerImage"
+                                   preserveRatio="false"
+                                   smooth="true"
+                                   mouseTransparent="true">
+                            <image>
+                                <Image url="@beauty-banner.jpg"/>
+                            </image>
+                        </ImageView>
 
                         <HBox alignment="CENTER_LEFT"
                               style="-fx-padding: 30;">
@@ -145,7 +151,8 @@
                                       -fx-font-weight: bold;
                                       -fx-text-fill: #A65378;"/>
 
-                        <HBox spacing="8" alignment="CENTER_LEFT">
+                        <HBox spacing="8"
+                              alignment="CENTER_LEFT">
 
                             <Label text="Your skin tone:"
                                    style="-fx-text-fill: #79576A;"/>
@@ -162,7 +169,7 @@
 
                     </VBox>
 
-                    <!-- FEATURED PRODUCTS -->
+                    <!-- RECOMMENDED PRODUCTS -->
                     <Label text="Recommended for You"
                            style="-fx-font-size: 23px;
                                   -fx-font-weight: bold;
@@ -345,7 +352,6 @@
 
                 </VBox>
             </content>
-
         </ScrollPane>
     </center>
 
