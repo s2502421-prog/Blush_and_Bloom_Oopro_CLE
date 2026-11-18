@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>ShoppingCart.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ShoppingCart.java</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">package </span><span class="s0">com</span><span class="s2">.</span><span class="s0">example</span><span class="s2">.</span><span class="s0">bandb</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">util</span><span class="s2">.</span><span class="s0">ArrayList</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">util</span><span class="s2">.</span><span class="s0">Collections</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">util</span><span class="s2">.</span><span class="s0">List</span><span class="s2">;</span>
+
+<span class="s1">public class </span><span class="s0">ShoppingCart </span><span class="s2">{</span>
+
+    <span class="s1">public static class </span><span class="s0">CartItem </span><span class="s2">{</span>
+        <span class="s1">private final </span><span class="s0">String category</span><span class="s2">;</span>
+        <span class="s1">private final </span><span class="s0">String productName</span><span class="s2">;</span>
+        <span class="s1">private final </span><span class="s0">String shade</span><span class="s2">;</span>
+        <span class="s1">private final double </span><span class="s0">price</span><span class="s2">;</span>
+        <span class="s1">private int </span><span class="s0">quantity</span><span class="s2">;</span>
+
+        <span class="s1">public </span><span class="s0">CartItem</span><span class="s2">(</span><span class="s0">String category</span><span class="s2">, </span><span class="s0">String productName</span><span class="s2">,</span>
+                        <span class="s0">String shade</span><span class="s2">, </span><span class="s1">double </span><span class="s0">price</span><span class="s2">) {</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">category </span><span class="s2">= </span><span class="s0">category</span><span class="s2">;</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">productName </span><span class="s2">= </span><span class="s0">productName</span><span class="s2">;</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">shade </span><span class="s2">= </span><span class="s0">shade</span><span class="s2">;</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">price </span><span class="s2">= </span><span class="s0">price</span><span class="s2">;</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">quantity </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">public </span><span class="s0">String getCategory</span><span class="s2">() {</span>
+            <span class="s1">return </span><span class="s0">category</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">public </span><span class="s0">String getProductName</span><span class="s2">() {</span>
+            <span class="s1">return </span><span class="s0">productName</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">public </span><span class="s0">String getShade</span><span class="s2">() {</span>
+            <span class="s1">return </span><span class="s0">shade</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">public double </span><span class="s0">getPrice</span><span class="s2">() {</span>
+            <span class="s1">return </span><span class="s0">price</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">public int </span><span class="s0">getQuantity</span><span class="s2">() {</span>
+            <span class="s1">return </span><span class="s0">quantity</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">public double </span><span class="s0">getSubtotal</span><span class="s2">() {</span>
+            <span class="s1">return </span><span class="s0">price </span><span class="s2">* </span><span class="s0">quantity</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">private void </span><span class="s0">increaseQuantity</span><span class="s2">() {</span>
+            <span class="s0">quantity</span><span class="s2">++;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">public void </span><span class="s0">setQuantity</span><span class="s2">(</span><span class="s1">int </span><span class="s0">quantity</span><span class="s2">) {</span>
+            <span class="s1">if </span><span class="s2">(</span><span class="s0">quantity </span><span class="s2">&lt; </span><span class="s3">1</span><span class="s2">) {</span>
+                <span class="s1">throw new </span><span class="s0">IllegalArgumentException</span><span class="s2">(</span>
+                        <span class="s4">&quot;Quantity must be at least 1.&quot;</span>
+                <span class="s2">);</span>
+            <span class="s2">}</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">quantity </span><span class="s2">= </span><span class="s0">quantity</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private static final </span><span class="s0">ArrayList</span><span class="s2">&lt;</span><span class="s0">CartItem</span><span class="s2">&gt; </span><span class="s0">items </span><span class="s2">=</span>
+            <span class="s1">new </span><span class="s0">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+    <span class="s1">public static void </span><span class="s0">addItem</span><span class="s2">(</span><span class="s0">String category</span><span class="s2">,</span>
+                               <span class="s0">String productName</span><span class="s2">,</span>
+                               <span class="s0">String shade</span><span class="s2">,</span>
+                               <span class="s1">double </span><span class="s0">price</span><span class="s2">) {</span>
+
+        <span class="s1">for </span><span class="s2">(</span><span class="s0">CartItem item </span><span class="s2">: </span><span class="s0">items</span><span class="s2">) {</span>
+            <span class="s1">if </span><span class="s2">(</span><span class="s0">item</span><span class="s2">.</span><span class="s0">getProductName</span><span class="s2">().</span><span class="s0">equals</span><span class="s2">(</span><span class="s0">productName</span><span class="s2">)</span>
+                    <span class="s2">&amp;&amp; </span><span class="s0">item</span><span class="s2">.</span><span class="s0">getShade</span><span class="s2">().</span><span class="s0">equals</span><span class="s2">(</span><span class="s0">shade</span><span class="s2">)) {</span>
+                <span class="s0">item</span><span class="s2">.</span><span class="s0">increaseQuantity</span><span class="s2">();</span>
+                <span class="s1">return</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">items</span><span class="s2">.</span><span class="s0">add</span><span class="s2">(</span><span class="s1">new </span><span class="s0">CartItem</span><span class="s2">(</span>
+                <span class="s0">category</span><span class="s2">, </span><span class="s0">productName</span><span class="s2">, </span><span class="s0">shade</span><span class="s2">, </span><span class="s0">price</span>
+        <span class="s2">));</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public static </span><span class="s0">List</span><span class="s2">&lt;</span><span class="s0">CartItem</span><span class="s2">&gt; </span><span class="s0">getItems</span><span class="s2">() {</span>
+        <span class="s1">return </span><span class="s0">Collections</span><span class="s2">.</span><span class="s0">unmodifiableList</span><span class="s2">(</span><span class="s0">items</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public static int </span><span class="s0">getTotalQuantity</span><span class="s2">() {</span>
+        <span class="s1">int </span><span class="s0">total </span><span class="s2">= </span><span class="s3">0</span><span class="s2">;</span>
+
+        <span class="s1">for </span><span class="s2">(</span><span class="s0">CartItem item </span><span class="s2">: </span><span class="s0">items</span><span class="s2">) {</span>
+            <span class="s0">total </span><span class="s2">+= </span><span class="s0">item</span><span class="s2">.</span><span class="s0">getQuantity</span><span class="s2">();</span>
+        <span class="s2">}</span>
+
+        <span class="s1">return </span><span class="s0">total</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public static double </span><span class="s0">getTotalPrice</span><span class="s2">() {</span>
+        <span class="s1">double </span><span class="s0">total </span><span class="s2">= </span><span class="s3">0</span><span class="s2">;</span>
+
+        <span class="s1">for </span><span class="s2">(</span><span class="s0">CartItem item </span><span class="s2">: </span><span class="s0">items</span><span class="s2">) {</span>
+            <span class="s0">total </span><span class="s2">+= </span><span class="s0">item</span><span class="s2">.</span><span class="s0">getSubtotal</span><span class="s2">();</span>
+        <span class="s2">}</span>
+
+        <span class="s1">return </span><span class="s0">total</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public static void </span><span class="s0">removeItem</span><span class="s2">(</span><span class="s0">CartItem item</span><span class="s2">) {</span>
+        <span class="s0">items</span><span class="s2">.</span><span class="s0">remove</span><span class="s2">(</span><span class="s0">item</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public static void </span><span class="s0">clear</span><span class="s2">() {</span>
+        <span class="s0">items</span><span class="s2">.</span><span class="s0">clear</span><span class="s2">();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

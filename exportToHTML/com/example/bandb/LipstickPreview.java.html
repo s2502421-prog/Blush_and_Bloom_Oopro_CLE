@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>LipstickPreview.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #7a7e85;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LipstickPreview.java</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">package </span><span class="s0">com</span><span class="s2">.</span><span class="s0">example</span><span class="s2">.</span><span class="s0">bandb</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">layout</span><span class="s2">.</span><span class="s0">Pane</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">layout</span><span class="s2">.</span><span class="s0">StackPane</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">paint</span><span class="s2">.</span><span class="s0">Color</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">shape</span><span class="s2">.*;</span>
+
+<span class="s1">public class </span><span class="s0">LipstickPreview </span><span class="s1">extends </span><span class="s0">StackPane </span><span class="s2">{</span>
+
+    <span class="s1">private final </span><span class="s0">Path lipstickBullet</span><span class="s2">;</span>
+
+    <span class="s1">public </span><span class="s0">LipstickPreview</span><span class="s2">() {</span>
+
+        <span class="s0">Pane canvas </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Pane</span><span class="s2">();</span>
+        <span class="s0">canvas</span><span class="s2">.</span><span class="s0">setPrefSize</span><span class="s2">(</span><span class="s3">190</span><span class="s2">, </span><span class="s3">220</span><span class="s2">);</span>
+        <span class="s0">canvas</span><span class="s2">.</span><span class="s0">setMinSize</span><span class="s2">(</span><span class="s3">190</span><span class="s2">, </span><span class="s3">220</span><span class="s2">);</span>
+        <span class="s0">canvas</span><span class="s2">.</span><span class="s0">setMaxSize</span><span class="s2">(</span><span class="s3">190</span><span class="s2">, </span><span class="s3">220</span><span class="s2">);</span>
+
+        <span class="s4">// Soft ground shadow</span>
+        <span class="s0">Ellipse shadow </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Ellipse</span><span class="s2">(</span><span class="s3">95</span><span class="s2">, </span><span class="s3">207</span><span class="s2">, </span><span class="s3">39</span><span class="s2">, </span><span class="s3">5</span><span class="s2">);</span>
+        <span class="s0">shadow</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#EAD8DF&quot;</span><span class="s2">, </span><span class="s3">0.65</span><span class="s2">));</span>
+
+        <span class="s4">// Rounded lipstick bullet</span>
+        <span class="s0">lipstickBullet </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Path</span><span class="s2">(</span>
+                <span class="s1">new </span><span class="s0">MoveTo</span><span class="s2">(</span><span class="s3">76</span><span class="s2">, </span><span class="s3">113</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">LineTo</span><span class="s2">(</span><span class="s3">76</span><span class="s2">, </span><span class="s3">70</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">CubicCurveTo</span><span class="s2">(</span><span class="s3">76</span><span class="s2">, </span><span class="s3">54</span><span class="s2">, </span><span class="s3">85</span><span class="s2">, </span><span class="s3">45</span><span class="s2">, </span><span class="s3">99</span><span class="s2">, </span><span class="s3">43</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">CubicCurveTo</span><span class="s2">(</span><span class="s3">109</span><span class="s2">, </span><span class="s3">41</span><span class="s2">, </span><span class="s3">114</span><span class="s2">, </span><span class="s3">47</span><span class="s2">, </span><span class="s3">114</span><span class="s2">, </span><span class="s3">56</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">LineTo</span><span class="s2">(</span><span class="s3">114</span><span class="s2">, </span><span class="s3">113</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">ClosePath</span><span class="s2">()</span>
+        <span class="s2">);</span>
+
+        <span class="s0">lipstickBullet</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#C97987&quot;</span><span class="s2">));</span>
+
+        <span class="s4">// Soft pink outline instead of black</span>
+        <span class="s0">lipstickBullet</span><span class="s2">.</span><span class="s0">setStroke</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#C98EA7&quot;</span><span class="s2">));</span>
+        <span class="s0">lipstickBullet</span><span class="s2">.</span><span class="s0">setStrokeWidth</span><span class="s2">(</span><span class="s3">1.5</span><span class="s2">);</span>
+        <span class="s0">lipstickBullet</span><span class="s2">.</span><span class="s0">setStrokeLineJoin</span><span class="s2">(</span><span class="s0">StrokeLineJoin</span><span class="s2">.</span><span class="s0">ROUND</span><span class="s2">);</span>
+
+        <span class="s4">// Gentle lipstick highlight</span>
+        <span class="s0">Path highlight </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Path</span><span class="s2">(</span>
+                <span class="s1">new </span><span class="s0">MoveTo</span><span class="s2">(</span><span class="s3">83</span><span class="s2">, </span><span class="s3">102</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">LineTo</span><span class="s2">(</span><span class="s3">83</span><span class="s2">, </span><span class="s3">74</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">CubicCurveTo</span><span class="s2">(</span><span class="s3">83</span><span class="s2">, </span><span class="s3">63</span><span class="s2">, </span><span class="s3">89</span><span class="s2">, </span><span class="s3">57</span><span class="s2">, </span><span class="s3">96</span><span class="s2">, </span><span class="s3">53</span><span class="s2">)</span>
+        <span class="s2">);</span>
+        <span class="s0">highlight</span><span class="s2">.</span><span class="s0">setStroke</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">WHITE</span><span class="s2">);</span>
+        <span class="s0">highlight</span><span class="s2">.</span><span class="s0">setStrokeWidth</span><span class="s2">(</span><span class="s3">4</span><span class="s2">);</span>
+        <span class="s0">highlight</span><span class="s2">.</span><span class="s0">setStrokeLineCap</span><span class="s2">(</span><span class="s0">StrokeLineCap</span><span class="s2">.</span><span class="s0">ROUND</span><span class="s2">);</span>
+        <span class="s0">highlight</span><span class="s2">.</span><span class="s0">setOpacity</span><span class="s2">(</span><span class="s3">0.25</span><span class="s2">);</span>
+        <span class="s0">highlight</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">TRANSPARENT</span><span class="s2">);</span>
+
+        <span class="s4">// Soft side shading</span>
+        <span class="s0">Path sideShade </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Path</span><span class="s2">(</span>
+                <span class="s1">new </span><span class="s0">MoveTo</span><span class="s2">(</span><span class="s3">108</span><span class="s2">, </span><span class="s3">58</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">LineTo</span><span class="s2">(</span><span class="s3">114</span><span class="s2">, </span><span class="s3">55</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">LineTo</span><span class="s2">(</span><span class="s3">114</span><span class="s2">, </span><span class="s3">112</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">LineTo</span><span class="s2">(</span><span class="s3">108</span><span class="s2">, </span><span class="s3">112</span><span class="s2">),</span>
+                <span class="s1">new </span><span class="s0">ClosePath</span><span class="s2">()</span>
+        <span class="s2">);</span>
+        <span class="s0">sideShade</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#9E617B&quot;</span><span class="s2">, </span><span class="s3">0.13</span><span class="s2">));</span>
+
+        <span class="s4">// Gold inner holder</span>
+        <span class="s0">Rectangle holder </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Rectangle</span><span class="s2">(</span><span class="s3">70</span><span class="s2">, </span><span class="s3">111</span><span class="s2">, </span><span class="s3">50</span><span class="s2">, </span><span class="s3">28</span><span class="s2">);</span>
+        <span class="s0">holder</span><span class="s2">.</span><span class="s0">setArcWidth</span><span class="s2">(</span><span class="s3">5</span><span class="s2">);</span>
+        <span class="s0">holder</span><span class="s2">.</span><span class="s0">setArcHeight</span><span class="s2">(</span><span class="s3">5</span><span class="s2">);</span>
+        <span class="s0">holder</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#DDBB87&quot;</span><span class="s2">));</span>
+
+        <span class="s4">// Gold shine</span>
+        <span class="s0">Rectangle holderShine </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Rectangle</span><span class="s2">(</span><span class="s3">77</span><span class="s2">, </span><span class="s3">116</span><span class="s2">, </span><span class="s3">5</span><span class="s2">, </span><span class="s3">18</span><span class="s2">);</span>
+        <span class="s0">holderShine</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#FFF0D2&quot;</span><span class="s2">, </span><span class="s3">0.65</span><span class="s2">));</span>
+
+        <span class="s4">// Soft gold collar</span>
+        <span class="s0">Rectangle collar </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Rectangle</span><span class="s2">(</span><span class="s3">66</span><span class="s2">, </span><span class="s3">138</span><span class="s2">, </span><span class="s3">58</span><span class="s2">, </span><span class="s3">10</span><span class="s2">);</span>
+        <span class="s0">collar</span><span class="s2">.</span><span class="s0">setArcWidth</span><span class="s2">(</span><span class="s3">4</span><span class="s2">);</span>
+        <span class="s0">collar</span><span class="s2">.</span><span class="s0">setArcHeight</span><span class="s2">(</span><span class="s3">4</span><span class="s2">);</span>
+        <span class="s0">collar</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#F0D5A4&quot;</span><span class="s2">));</span>
+
+        <span class="s4">// Pink lipstick case</span>
+        <span class="s0">Rectangle tube </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Rectangle</span><span class="s2">(</span><span class="s3">65</span><span class="s2">, </span><span class="s3">147</span><span class="s2">, </span><span class="s3">60</span><span class="s2">, </span><span class="s3">55</span><span class="s2">);</span>
+        <span class="s0">tube</span><span class="s2">.</span><span class="s0">setArcWidth</span><span class="s2">(</span><span class="s3">12</span><span class="s2">);</span>
+        <span class="s0">tube</span><span class="s2">.</span><span class="s0">setArcHeight</span><span class="s2">(</span><span class="s3">12</span><span class="s2">);</span>
+        <span class="s0">tube</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#D991B1&quot;</span><span class="s2">));</span>
+        <span class="s0">tube</span><span class="s2">.</span><span class="s0">setStroke</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#C98EA7&quot;</span><span class="s2">));</span>
+        <span class="s0">tube</span><span class="s2">.</span><span class="s0">setStrokeWidth</span><span class="s2">(</span><span class="s3">2</span><span class="s2">);</span>
+
+        <span class="s4">// Glossy highlight</span>
+        <span class="s0">Rectangle tubeShine </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Rectangle</span><span class="s2">(</span><span class="s3">73</span><span class="s2">, </span><span class="s3">154</span><span class="s2">, </span><span class="s3">6</span><span class="s2">, </span><span class="s3">35</span><span class="s2">);</span>
+        <span class="s0">tubeShine</span><span class="s2">.</span><span class="s0">setArcWidth</span><span class="s2">(</span><span class="s3">6</span><span class="s2">);</span>
+        <span class="s0">tubeShine</span><span class="s2">.</span><span class="s0">setArcHeight</span><span class="s2">(</span><span class="s3">6</span><span class="s2">);</span>
+        <span class="s0">tubeShine</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">WHITE</span><span class="s2">);</span>
+        <span class="s0">tubeShine</span><span class="s2">.</span><span class="s0">setOpacity</span><span class="s2">(</span><span class="s3">0.35</span><span class="s2">);</span>
+
+        <span class="s4">// Bottom gold accent</span>
+        <span class="s0">Rectangle goldStripe </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Rectangle</span><span class="s2">(</span><span class="s3">69</span><span class="s2">, </span><span class="s3">193</span><span class="s2">, </span><span class="s3">52</span><span class="s2">, </span><span class="s3">4</span><span class="s2">);</span>
+        <span class="s0">goldStripe</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#F0D5A4&quot;</span><span class="s2">));</span>
+
+        <span class="s0">canvas</span><span class="s2">.</span><span class="s0">getChildren</span><span class="s2">().</span><span class="s0">addAll</span><span class="s2">(</span>
+                <span class="s0">shadow</span><span class="s2">,</span>
+                <span class="s0">lipstickBullet</span><span class="s2">,</span>
+                <span class="s0">sideShade</span><span class="s2">,</span>
+                <span class="s0">highlight</span><span class="s2">,</span>
+                <span class="s0">holder</span><span class="s2">,</span>
+                <span class="s0">holderShine</span><span class="s2">,</span>
+                <span class="s0">collar</span><span class="s2">,</span>
+                <span class="s0">tube</span><span class="s2">,</span>
+                <span class="s0">tubeShine</span><span class="s2">,</span>
+                <span class="s0">goldStripe</span>
+        <span class="s2">);</span>
+
+        <span class="s0">getChildren</span><span class="s2">().</span><span class="s0">add</span><span class="s2">(</span><span class="s0">canvas</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public void </span><span class="s0">setShadeColor</span><span class="s2">(</span><span class="s0">String hexColor</span><span class="s2">) {</span>
+        <span class="s0">lipstickBullet</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s0">hexColor</span><span class="s2">));</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

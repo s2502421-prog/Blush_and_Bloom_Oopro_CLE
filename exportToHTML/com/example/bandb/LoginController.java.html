@@ -1,0 +1,136 @@
+<html>
+<head>
+<title>LoginController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LoginController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">bandb</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">Alert</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">PasswordField</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">TextField</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXMLLoader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">animation</span><span class="s2">.</span><span class="s1">FadeTransition</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">animation</span><span class="s2">.</span><span class="s1">TranslateTransition</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">Label</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Duration</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">LoginController </span><span class="s2">{</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField usernameField</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">PasswordField passwordField</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Label loginErrorLabel</span><span class="s2">;</span>
+
+
+    <span class="s0">private void </span><span class="s1">showLoginError</span><span class="s2">(</span><span class="s1">String message</span><span class="s2">) {</span>
+
+        <span class="s1">loginErrorLabel</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;✕  &quot; </span><span class="s2">+ </span><span class="s1">message</span><span class="s2">);</span>
+        <span class="s1">loginErrorLabel</span><span class="s2">.</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s1">loginErrorLabel</span><span class="s2">.</span><span class="s1">setManaged</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+        <span class="s1">loginErrorLabel</span><span class="s2">.</span><span class="s1">setOpacity</span><span class="s2">(</span><span class="s4">0</span><span class="s2">);</span>
+
+        <span class="s1">FadeTransition fade </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FadeTransition</span><span class="s2">(</span>
+                <span class="s1">Duration</span><span class="s2">.</span><span class="s1">millis</span><span class="s2">(</span><span class="s4">350</span><span class="s2">), </span><span class="s1">loginErrorLabel</span>
+        <span class="s2">);</span>
+
+        <span class="s1">fade</span><span class="s2">.</span><span class="s1">setFromValue</span><span class="s2">(</span><span class="s4">0</span><span class="s2">);</span>
+        <span class="s1">fade</span><span class="s2">.</span><span class="s1">setToValue</span><span class="s2">(</span><span class="s4">1</span><span class="s2">);</span>
+
+        <span class="s1">TranslateTransition shake </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TranslateTransition</span><span class="s2">(</span>
+                <span class="s1">Duration</span><span class="s2">.</span><span class="s1">millis</span><span class="s2">(</span><span class="s4">70</span><span class="s2">), </span><span class="s1">loginErrorLabel</span>
+        <span class="s2">);</span>
+
+        <span class="s1">shake</span><span class="s2">.</span><span class="s1">setFromX</span><span class="s2">(-</span><span class="s4">5</span><span class="s2">);</span>
+        <span class="s1">shake</span><span class="s2">.</span><span class="s1">setToX</span><span class="s2">(</span><span class="s4">5</span><span class="s2">);</span>
+        <span class="s1">shake</span><span class="s2">.</span><span class="s1">setCycleCount</span><span class="s2">(</span><span class="s4">4</span><span class="s2">);</span>
+        <span class="s1">shake</span><span class="s2">.</span><span class="s1">setAutoReverse</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+        <span class="s1">fade</span><span class="s2">.</span><span class="s1">play</span><span class="s2">();</span>
+        <span class="s1">shake</span><span class="s2">.</span><span class="s1">play</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private void </span><span class="s1">handleLogin</span><span class="s2">() {</span>
+
+        <span class="s1">String username </span><span class="s2">= </span><span class="s1">usernameField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">String password </span><span class="s2">= </span><span class="s1">passwordField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">username</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">() || </span><span class="s1">password</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">showLoginError</span><span class="s2">(</span><span class="s3">&quot;Please enter your username and password.&quot;</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">Customer customer </span><span class="s2">= </span><span class="s1">CustomerData</span><span class="s2">.</span><span class="s1">login</span><span class="s2">(</span><span class="s1">username</span><span class="s2">, </span><span class="s1">password</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">customer </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">FXMLLoader loader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span>
+                        <span class="s1">getClass</span><span class="s2">().</span><span class="s1">getResource</span><span class="s2">(</span><span class="s3">&quot;skintone.fxml&quot;</span><span class="s2">)</span>
+                <span class="s2">);</span>
+
+                <span class="s1">Stage stage </span><span class="s2">= (</span><span class="s1">Stage</span><span class="s2">)</span>
+                        <span class="s1">usernameField</span><span class="s2">.</span><span class="s1">getScene</span><span class="s2">().</span><span class="s1">getWindow</span><span class="s2">();</span>
+
+                <span class="s1">Scene scene </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">loader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">());</span>
+                <span class="s1">SceneManager</span><span class="s2">.</span><span class="s1">switchScene</span><span class="s2">(</span><span class="s3">&quot;skintone.fxml&quot;</span><span class="s2">);</span>
+
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+                <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+                <span class="s1">showAlert</span><span class="s2">(</span><span class="s3">&quot;Unable to open skin tone selection.&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">showLoginError</span><span class="s2">(</span><span class="s3">&quot;Invalid username or password.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showAlert</span><span class="s2">(</span><span class="s1">String message</span><span class="s2">) {</span>
+        <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">INFORMATION</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s3">&quot;Blush &amp; Bloom&quot;</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">setContentText</span><span class="s2">(</span><span class="s1">message</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private void </span><span class="s1">handleRegisterPage</span><span class="s2">() {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">Stage stage </span><span class="s2">= (</span><span class="s1">Stage</span><span class="s2">)</span>
+                    <span class="s1">usernameField</span><span class="s2">.</span><span class="s1">getScene</span><span class="s2">().</span><span class="s1">getWindow</span><span class="s2">();</span>
+
+            <span class="s1">SceneManager</span><span class="s2">.</span><span class="s1">switchScene</span><span class="s2">(</span><span class="s3">&quot;register.fxml&quot;</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+            <span class="s1">showAlert</span><span class="s2">(</span><span class="s3">&quot;Unable to open registration page.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span></pre>
+</body>
+</html>

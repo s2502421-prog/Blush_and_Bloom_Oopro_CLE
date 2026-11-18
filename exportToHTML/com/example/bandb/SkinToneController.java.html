@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>SkinToneController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SkinToneController.java</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">package </span><span class="s0">com</span><span class="s2">.</span><span class="s0">example</span><span class="s2">.</span><span class="s0">bandb</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">animation</span><span class="s2">.</span><span class="s0">ScaleTransition</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">fxml</span><span class="s2">.</span><span class="s0">FXML</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">Alert</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">Label</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">ToggleButton</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">ToggleGroup</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">util</span><span class="s2">.</span><span class="s0">Duration</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">io</span><span class="s2">.</span><span class="s0">IOException</span><span class="s2">;</span>
+
+<span class="s1">public class </span><span class="s0">SkinToneController </span><span class="s2">{</span>
+
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">ToggleButton fairButton</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">ToggleButton lightButton</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">ToggleButton mediumButton</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">ToggleButton tanButton</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">ToggleButton deepButton</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">ToggleButton richDeepButton</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Label selectedLabel</span><span class="s2">;</span>
+
+    <span class="s1">private </span><span class="s0">ToggleGroup toneGroup</span><span class="s2">;</span>
+
+    <span class="s1">private static </span><span class="s0">String selectedSkinTone</span><span class="s2">;</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">public void </span><span class="s0">initialize</span><span class="s2">() {</span>
+
+        <span class="s0">toneGroup </span><span class="s2">= </span><span class="s1">new </span><span class="s0">ToggleGroup</span><span class="s2">();</span>
+
+        <span class="s0">fairButton</span><span class="s2">.</span><span class="s0">setToggleGroup</span><span class="s2">(</span><span class="s0">toneGroup</span><span class="s2">);</span>
+        <span class="s0">lightButton</span><span class="s2">.</span><span class="s0">setToggleGroup</span><span class="s2">(</span><span class="s0">toneGroup</span><span class="s2">);</span>
+        <span class="s0">mediumButton</span><span class="s2">.</span><span class="s0">setToggleGroup</span><span class="s2">(</span><span class="s0">toneGroup</span><span class="s2">);</span>
+        <span class="s0">tanButton</span><span class="s2">.</span><span class="s0">setToggleGroup</span><span class="s2">(</span><span class="s0">toneGroup</span><span class="s2">);</span>
+        <span class="s0">deepButton</span><span class="s2">.</span><span class="s0">setToggleGroup</span><span class="s2">(</span><span class="s0">toneGroup</span><span class="s2">);</span>
+        <span class="s0">richDeepButton</span><span class="s2">.</span><span class="s0">setToggleGroup</span><span class="s2">(</span><span class="s0">toneGroup</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private void </span><span class="s0">selectTone</span><span class="s2">(</span>
+            <span class="s0">String tone</span><span class="s2">,</span>
+            <span class="s0">ToggleButton button</span><span class="s2">) {</span>
+
+        <span class="s0">selectedSkinTone </span><span class="s2">= </span><span class="s0">tone</span><span class="s2">;</span>
+
+        <span class="s0">selectedLabel</span><span class="s2">.</span><span class="s0">setText</span><span class="s2">(</span><span class="s3">&quot;Selected: &quot; </span><span class="s2">+ </span><span class="s0">tone</span><span class="s2">);</span>
+
+        <span class="s0">ScaleTransition animation </span><span class="s2">=</span>
+                <span class="s1">new </span><span class="s0">ScaleTransition</span><span class="s2">(</span>
+                        <span class="s0">Duration</span><span class="s2">.</span><span class="s0">millis</span><span class="s2">(</span><span class="s4">180</span><span class="s2">),</span>
+                        <span class="s0">button</span>
+                <span class="s2">);</span>
+
+        <span class="s0">animation</span><span class="s2">.</span><span class="s0">setFromX</span><span class="s2">(</span><span class="s4">0.95</span><span class="s2">);</span>
+        <span class="s0">animation</span><span class="s2">.</span><span class="s0">setFromY</span><span class="s2">(</span><span class="s4">0.95</span><span class="s2">);</span>
+        <span class="s0">animation</span><span class="s2">.</span><span class="s0">setToX</span><span class="s2">(</span><span class="s4">1</span><span class="s2">);</span>
+        <span class="s0">animation</span><span class="s2">.</span><span class="s0">setToY</span><span class="s2">(</span><span class="s4">1</span><span class="s2">);</span>
+
+        <span class="s0">animation</span><span class="s2">.</span><span class="s0">play</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleFair</span><span class="s2">() {</span>
+        <span class="s0">selectTone</span><span class="s2">(</span><span class="s3">&quot;Fair&quot;</span><span class="s2">, </span><span class="s0">fairButton</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleLight</span><span class="s2">() {</span>
+        <span class="s0">selectTone</span><span class="s2">(</span><span class="s3">&quot;Light&quot;</span><span class="s2">, </span><span class="s0">lightButton</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleMedium</span><span class="s2">() {</span>
+        <span class="s0">selectTone</span><span class="s2">(</span><span class="s3">&quot;Medium&quot;</span><span class="s2">, </span><span class="s0">mediumButton</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleTan</span><span class="s2">() {</span>
+        <span class="s0">selectTone</span><span class="s2">(</span><span class="s3">&quot;Tan&quot;</span><span class="s2">, </span><span class="s0">tanButton</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleDeep</span><span class="s2">() {</span>
+        <span class="s0">selectTone</span><span class="s2">(</span><span class="s3">&quot;Deep&quot;</span><span class="s2">, </span><span class="s0">deepButton</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleRichDeep</span><span class="s2">() {</span>
+        <span class="s0">selectTone</span><span class="s2">(</span><span class="s3">&quot;Rich Deep&quot;</span><span class="s2">, </span><span class="s0">richDeepButton</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleContinue</span><span class="s2">() {</span>
+
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">toneGroup</span><span class="s2">.</span><span class="s0">getSelectedToggle</span><span class="s2">() == </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s0">showAlert</span><span class="s2">(</span><span class="s3">&quot;Please select your skin tone.&quot;</span><span class="s2">);</span>
+            <span class="s1">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">ToggleButton selectedButton </span><span class="s2">=</span>
+                <span class="s2">(</span><span class="s0">ToggleButton</span><span class="s2">) </span><span class="s0">toneGroup</span><span class="s2">.</span><span class="s0">getSelectedToggle</span><span class="s2">();</span>
+
+        <span class="s0">selectedSkinTone </span><span class="s2">= </span><span class="s0">selectedButton</span><span class="s2">.</span><span class="s0">getText</span><span class="s2">();</span>
+
+        <span class="s1">try </span><span class="s2">{</span>
+            <span class="s0">SceneManager</span><span class="s2">.</span><span class="s0">switchScene</span><span class="s2">(</span><span class="s3">&quot;home.fxml&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s1">catch </span><span class="s2">(</span><span class="s0">IOException e</span><span class="s2">) {</span>
+            <span class="s0">e</span><span class="s2">.</span><span class="s0">printStackTrace</span><span class="s2">();</span>
+
+            <span class="s0">Throwable cause </span><span class="s2">= </span><span class="s0">e</span><span class="s2">;</span>
+            <span class="s1">while </span><span class="s2">(</span><span class="s0">cause</span><span class="s2">.</span><span class="s0">getCause</span><span class="s2">() != </span><span class="s1">null</span><span class="s2">) {</span>
+                <span class="s0">cause </span><span class="s2">= </span><span class="s0">cause</span><span class="s2">.</span><span class="s0">getCause</span><span class="s2">();</span>
+            <span class="s2">}</span>
+
+            <span class="s0">showAlert</span><span class="s2">(</span><span class="s3">&quot;Homepage error:</span><span class="s1">\n</span><span class="s3">&quot; </span><span class="s2">+ </span><span class="s0">cause</span><span class="s2">.</span><span class="s0">getMessage</span><span class="s2">());</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public static </span><span class="s0">String getSelectedSkinTone</span><span class="s2">() {</span>
+        <span class="s1">return </span><span class="s0">selectedSkinTone</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private void </span><span class="s0">showAlert</span><span class="s2">(</span><span class="s0">String message</span><span class="s2">) {</span>
+
+        <span class="s0">Alert alert </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Alert</span><span class="s2">(</span>
+                <span class="s0">Alert</span><span class="s2">.</span><span class="s0">AlertType</span><span class="s2">.</span><span class="s0">INFORMATION</span>
+        <span class="s2">);</span>
+
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">setTitle</span><span class="s2">(</span><span class="s3">&quot;Blush &amp; Bloom&quot;</span><span class="s2">);</span>
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">setHeaderText</span><span class="s2">(</span><span class="s1">null</span><span class="s2">);</span>
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">setContentText</span><span class="s2">(</span><span class="s0">message</span><span class="s2">);</span>
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">showAndWait</span><span class="s2">();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

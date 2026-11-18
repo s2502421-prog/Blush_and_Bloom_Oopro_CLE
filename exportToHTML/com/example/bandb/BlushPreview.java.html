@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>BlushPreview.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #7a7e85;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+BlushPreview.java</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">package </span><span class="s0">com</span><span class="s2">.</span><span class="s0">example</span><span class="s2">.</span><span class="s0">bandb</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">layout</span><span class="s2">.</span><span class="s0">Pane</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">layout</span><span class="s2">.</span><span class="s0">StackPane</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">paint</span><span class="s2">.</span><span class="s0">Color</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">shape</span><span class="s2">.*;</span>
+
+<span class="s1">public class </span><span class="s0">BlushPreview </span><span class="s1">extends </span><span class="s0">StackPane </span><span class="s2">{</span>
+
+    <span class="s1">private final </span><span class="s0">Ellipse powder</span><span class="s2">;</span>
+
+    <span class="s1">public </span><span class="s0">BlushPreview</span><span class="s2">() {</span>
+
+        <span class="s0">Pane canvas </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Pane</span><span class="s2">();</span>
+        <span class="s0">canvas</span><span class="s2">.</span><span class="s0">setPrefSize</span><span class="s2">(</span><span class="s3">190</span><span class="s2">, </span><span class="s3">220</span><span class="s2">);</span>
+        <span class="s0">canvas</span><span class="s2">.</span><span class="s0">setMinSize</span><span class="s2">(</span><span class="s3">190</span><span class="s2">, </span><span class="s3">220</span><span class="s2">);</span>
+        <span class="s0">canvas</span><span class="s2">.</span><span class="s0">setMaxSize</span><span class="s2">(</span><span class="s3">190</span><span class="s2">, </span><span class="s3">220</span><span class="s2">);</span>
+
+        <span class="s4">// Soft shadow</span>
+        <span class="s0">Ellipse shadow </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Ellipse</span><span class="s2">(</span><span class="s3">95</span><span class="s2">, </span><span class="s3">191</span><span class="s2">, </span><span class="s3">61</span><span class="s2">, </span><span class="s3">7</span><span class="s2">);</span>
+        <span class="s0">shadow</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#EAD8DF&quot;</span><span class="s2">, </span><span class="s3">0.55</span><span class="s2">));</span>
+
+        <span class="s4">// Compact lid</span>
+        <span class="s0">Ellipse lid </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Ellipse</span><span class="s2">(</span><span class="s3">95</span><span class="s2">, </span><span class="s3">79</span><span class="s2">, </span><span class="s3">65</span><span class="s2">, </span><span class="s3">37</span><span class="s2">);</span>
+        <span class="s0">lid</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#EABACD&quot;</span><span class="s2">));</span>
+        <span class="s0">lid</span><span class="s2">.</span><span class="s0">setStroke</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#C98EA7&quot;</span><span class="s2">));</span>
+        <span class="s0">lid</span><span class="s2">.</span><span class="s0">setStrokeWidth</span><span class="s2">(</span><span class="s3">2.5</span><span class="s2">);</span>
+
+        <span class="s4">// Mirror</span>
+        <span class="s0">Ellipse mirror </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Ellipse</span><span class="s2">(</span><span class="s3">95</span><span class="s2">, </span><span class="s3">79</span><span class="s2">, </span><span class="s3">55</span><span class="s2">, </span><span class="s3">29</span><span class="s2">);</span>
+        <span class="s0">mirror</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#FFF9FC&quot;</span><span class="s2">));</span>
+        <span class="s0">mirror</span><span class="s2">.</span><span class="s0">setStroke</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#F4E4ED&quot;</span><span class="s2">));</span>
+        <span class="s0">mirror</span><span class="s2">.</span><span class="s0">setStrokeWidth</span><span class="s2">(</span><span class="s3">3</span><span class="s2">);</span>
+
+        <span class="s4">// Mirror highlight</span>
+        <span class="s0">Ellipse mirrorShine </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Ellipse</span><span class="s2">(</span><span class="s3">75</span><span class="s2">, </span><span class="s3">70</span><span class="s2">, </span><span class="s3">14</span><span class="s2">, </span><span class="s3">5</span><span class="s2">);</span>
+        <span class="s0">mirrorShine</span><span class="s2">.</span><span class="s0">setRotate</span><span class="s2">(-</span><span class="s3">20</span><span class="s2">);</span>
+        <span class="s0">mirrorShine</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">WHITE</span><span class="s2">);</span>
+        <span class="s0">mirrorShine</span><span class="s2">.</span><span class="s0">setOpacity</span><span class="s2">(</span><span class="s3">0.8</span><span class="s2">);</span>
+
+        <span class="s4">// Hinge</span>
+        <span class="s0">Rectangle hinge </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Rectangle</span><span class="s2">(</span><span class="s3">80</span><span class="s2">, </span><span class="s3">111</span><span class="s2">, </span><span class="s3">30</span><span class="s2">, </span><span class="s3">9</span><span class="s2">);</span>
+        <span class="s0">hinge</span><span class="s2">.</span><span class="s0">setArcWidth</span><span class="s2">(</span><span class="s3">5</span><span class="s2">);</span>
+        <span class="s0">hinge</span><span class="s2">.</span><span class="s0">setArcHeight</span><span class="s2">(</span><span class="s3">5</span><span class="s2">);</span>
+        <span class="s0">hinge</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#D9B67B&quot;</span><span class="s2">));</span>
+
+        <span class="s4">// Compact base</span>
+        <span class="s0">Ellipse base </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Ellipse</span><span class="s2">(</span><span class="s3">95</span><span class="s2">, </span><span class="s3">151</span><span class="s2">, </span><span class="s3">66</span><span class="s2">, </span><span class="s3">43</span><span class="s2">);</span>
+        <span class="s0">base</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#DFA7BE&quot;</span><span class="s2">));</span>
+        <span class="s0">base</span><span class="s2">.</span><span class="s0">setStroke</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#BE819A&quot;</span><span class="s2">));</span>
+        <span class="s0">base</span><span class="s2">.</span><span class="s0">setStrokeWidth</span><span class="s2">(</span><span class="s3">2.5</span><span class="s2">);</span>
+
+        <span class="s4">// Gold rim</span>
+        <span class="s0">Ellipse goldRim </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Ellipse</span><span class="s2">(</span><span class="s3">95</span><span class="s2">, </span><span class="s3">147</span><span class="s2">, </span><span class="s3">55</span><span class="s2">, </span><span class="s3">34</span><span class="s2">);</span>
+        <span class="s0">goldRim</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#E4C28C&quot;</span><span class="s2">));</span>
+
+        <span class="s4">// White tray</span>
+        <span class="s0">Ellipse tray </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Ellipse</span><span class="s2">(</span><span class="s3">95</span><span class="s2">, </span><span class="s3">146</span><span class="s2">, </span><span class="s3">51</span><span class="s2">, </span><span class="s3">30</span><span class="s2">);</span>
+        <span class="s0">tray</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#FFF1F6&quot;</span><span class="s2">));</span>
+
+        <span class="s4">// Actual blush powder</span>
+        <span class="s0">powder </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Ellipse</span><span class="s2">(</span><span class="s3">95</span><span class="s2">, </span><span class="s3">145</span><span class="s2">, </span><span class="s3">45</span><span class="s2">, </span><span class="s3">25</span><span class="s2">);</span>
+        <span class="s0">powder</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#F5A9C0&quot;</span><span class="s2">));</span>
+
+        <span class="s4">// Powder highlight</span>
+        <span class="s0">Ellipse highlight </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Ellipse</span><span class="s2">(</span><span class="s3">78</span><span class="s2">, </span><span class="s3">137</span><span class="s2">, </span><span class="s3">12</span><span class="s2">, </span><span class="s3">4</span><span class="s2">);</span>
+        <span class="s0">highlight</span><span class="s2">.</span><span class="s0">setRotate</span><span class="s2">(-</span><span class="s3">20</span><span class="s2">);</span>
+        <span class="s0">highlight</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">WHITE</span><span class="s2">);</span>
+        <span class="s0">highlight</span><span class="s2">.</span><span class="s0">setOpacity</span><span class="s2">(</span><span class="s3">0.18</span><span class="s2">);</span>
+
+        <span class="s4">// Front clasp</span>
+        <span class="s0">Rectangle clasp </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Rectangle</span><span class="s2">(</span><span class="s3">86</span><span class="s2">, </span><span class="s3">184</span><span class="s2">, </span><span class="s3">18</span><span class="s2">, </span><span class="s3">5</span><span class="s2">);</span>
+        <span class="s0">clasp</span><span class="s2">.</span><span class="s0">setArcWidth</span><span class="s2">(</span><span class="s3">4</span><span class="s2">);</span>
+        <span class="s0">clasp</span><span class="s2">.</span><span class="s0">setArcHeight</span><span class="s2">(</span><span class="s3">4</span><span class="s2">);</span>
+        <span class="s0">clasp</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s5">&quot;#E8C991&quot;</span><span class="s2">));</span>
+
+        <span class="s0">canvas</span><span class="s2">.</span><span class="s0">getChildren</span><span class="s2">().</span><span class="s0">addAll</span><span class="s2">(</span>
+                <span class="s0">shadow</span><span class="s2">, </span><span class="s0">lid</span><span class="s2">, </span><span class="s0">mirror</span><span class="s2">, </span><span class="s0">mirrorShine</span><span class="s2">,</span>
+                <span class="s0">hinge</span><span class="s2">, </span><span class="s0">base</span><span class="s2">, </span><span class="s0">goldRim</span><span class="s2">, </span><span class="s0">tray</span><span class="s2">,</span>
+                <span class="s0">powder</span><span class="s2">, </span><span class="s0">highlight</span><span class="s2">, </span><span class="s0">clasp</span>
+        <span class="s2">);</span>
+
+        <span class="s0">getChildren</span><span class="s2">().</span><span class="s0">add</span><span class="s2">(</span><span class="s0">canvas</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public void </span><span class="s0">setShadeColor</span><span class="s2">(</span><span class="s0">String hexColor</span><span class="s2">) {</span>
+        <span class="s0">powder</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s0">hexColor</span><span class="s2">));</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>SuccessController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SuccessController.java</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">package </span><span class="s0">com</span><span class="s2">.</span><span class="s0">example</span><span class="s2">.</span><span class="s0">bandb</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">animation</span><span class="s2">.</span><span class="s0">FadeTransition</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">animation</span><span class="s2">.</span><span class="s0">ParallelTransition</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">animation</span><span class="s2">.</span><span class="s0">ScaleTransition</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">fxml</span><span class="s2">.</span><span class="s0">FXML</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">fxml</span><span class="s2">.</span><span class="s0">FXMLLoader</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">Scene</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">Label</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">layout</span><span class="s2">.</span><span class="s0">VBox</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">stage</span><span class="s2">.</span><span class="s0">Stage</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">util</span><span class="s2">.</span><span class="s0">Duration</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">io</span><span class="s2">.</span><span class="s0">IOException</span><span class="s2">;</span>
+
+<span class="s1">public class </span><span class="s0">SuccessController </span><span class="s2">{</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private </span><span class="s0">VBox successCard</span><span class="s2">;</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private </span><span class="s0">Label checkIcon</span><span class="s2">;</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">public void </span><span class="s0">initialize</span><span class="s2">() {</span>
+
+        <span class="s0">successCard</span><span class="s2">.</span><span class="s0">setOpacity</span><span class="s2">(</span><span class="s3">0</span><span class="s2">);</span>
+        <span class="s0">successCard</span><span class="s2">.</span><span class="s0">setScaleX</span><span class="s2">(</span><span class="s3">0.8</span><span class="s2">);</span>
+        <span class="s0">successCard</span><span class="s2">.</span><span class="s0">setScaleY</span><span class="s2">(</span><span class="s3">0.8</span><span class="s2">);</span>
+
+        <span class="s0">FadeTransition fade </span><span class="s2">= </span><span class="s1">new </span><span class="s0">FadeTransition</span><span class="s2">(</span>
+                <span class="s0">Duration</span><span class="s2">.</span><span class="s0">millis</span><span class="s2">(</span><span class="s3">800</span><span class="s2">), </span><span class="s0">successCard</span>
+        <span class="s2">);</span>
+
+        <span class="s0">fade</span><span class="s2">.</span><span class="s0">setFromValue</span><span class="s2">(</span><span class="s3">0</span><span class="s2">);</span>
+        <span class="s0">fade</span><span class="s2">.</span><span class="s0">setToValue</span><span class="s2">(</span><span class="s3">1</span><span class="s2">);</span>
+
+        <span class="s0">ScaleTransition zoom </span><span class="s2">= </span><span class="s1">new </span><span class="s0">ScaleTransition</span><span class="s2">(</span>
+                <span class="s0">Duration</span><span class="s2">.</span><span class="s0">millis</span><span class="s2">(</span><span class="s3">800</span><span class="s2">), </span><span class="s0">successCard</span>
+        <span class="s2">);</span>
+
+        <span class="s0">zoom</span><span class="s2">.</span><span class="s0">setFromX</span><span class="s2">(</span><span class="s3">0.8</span><span class="s2">);</span>
+        <span class="s0">zoom</span><span class="s2">.</span><span class="s0">setFromY</span><span class="s2">(</span><span class="s3">0.8</span><span class="s2">);</span>
+        <span class="s0">zoom</span><span class="s2">.</span><span class="s0">setToX</span><span class="s2">(</span><span class="s3">1</span><span class="s2">);</span>
+        <span class="s0">zoom</span><span class="s2">.</span><span class="s0">setToY</span><span class="s2">(</span><span class="s3">1</span><span class="s2">);</span>
+
+        <span class="s0">ParallelTransition animation </span><span class="s2">=</span>
+                <span class="s1">new </span><span class="s0">ParallelTransition</span><span class="s2">(</span><span class="s0">fade</span><span class="s2">, </span><span class="s0">zoom</span><span class="s2">);</span>
+
+        <span class="s0">animation</span><span class="s2">.</span><span class="s0">play</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleContinue</span><span class="s2">() {</span>
+        <span class="s1">try </span><span class="s2">{</span>
+            <span class="s0">Stage stage </span><span class="s2">= (</span><span class="s0">Stage</span><span class="s2">)</span>
+                    <span class="s0">successCard</span><span class="s2">.</span><span class="s0">getScene</span><span class="s2">().</span><span class="s0">getWindow</span><span class="s2">();</span>
+            <span class="s0">SceneManager</span><span class="s2">.</span><span class="s0">switchScene</span><span class="s2">(</span><span class="s4">&quot;login.fxml&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s1">catch </span><span class="s2">(</span><span class="s0">IOException e</span><span class="s2">) {</span>
+            <span class="s0">e</span><span class="s2">.</span><span class="s0">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

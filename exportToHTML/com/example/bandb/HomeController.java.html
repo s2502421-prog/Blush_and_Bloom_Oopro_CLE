@@ -1,0 +1,211 @@
+<html>
+<head>
+<title>HomeController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+HomeController.java</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">package </span><span class="s0">com</span><span class="s2">.</span><span class="s0">example</span><span class="s2">.</span><span class="s0">bandb</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">fxml</span><span class="s2">.</span><span class="s0">FXML</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">Alert</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">Label</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">image</span><span class="s2">.</span><span class="s0">ImageView</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">layout</span><span class="s2">.</span><span class="s0">StackPane</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">io</span><span class="s2">.</span><span class="s0">IOException</span><span class="s2">;</span>
+
+<span class="s1">public class </span><span class="s0">HomeController </span><span class="s2">{</span>
+
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Label skinToneLabel</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Label foundationShade</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Label blushShade</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Label lipstickShade</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Label beautyMessage</span><span class="s2">;</span>
+
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">StackPane foundationContainer</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">StackPane blushContainer</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">StackPane lipstickContainer</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">StackPane bannerContainer</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">ImageView bannerImage</span><span class="s2">;</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">public void </span><span class="s0">initialize</span><span class="s2">() {</span>
+
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">bannerImage </span><span class="s2">!= </span><span class="s1">null </span><span class="s2">&amp;&amp; </span><span class="s0">bannerContainer </span><span class="s2">!= </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s0">bannerImage</span><span class="s2">.</span><span class="s0">fitWidthProperty</span><span class="s2">().</span><span class="s0">bind</span><span class="s2">(</span>
+                    <span class="s0">bannerContainer</span><span class="s2">.</span><span class="s0">widthProperty</span><span class="s2">()</span>
+            <span class="s2">);</span>
+            <span class="s0">bannerImage</span><span class="s2">.</span><span class="s0">fitHeightProperty</span><span class="s2">().</span><span class="s0">bind</span><span class="s2">(</span>
+                    <span class="s0">bannerContainer</span><span class="s2">.</span><span class="s0">heightProperty</span><span class="s2">()</span>
+            <span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s0">String tone </span><span class="s2">= </span><span class="s0">SkinToneController</span><span class="s2">.</span><span class="s0">getSelectedSkinTone</span><span class="s2">();</span>
+
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">tone </span><span class="s2">== </span><span class="s1">null </span><span class="s2">|| </span><span class="s0">tone</span><span class="s2">.</span><span class="s0">isBlank</span><span class="s2">()) {</span>
+            <span class="s0">tone </span><span class="s2">= </span><span class="s3">&quot;Medium&quot;</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">String foundationName</span><span class="s2">;</span>
+        <span class="s0">String foundationColor</span><span class="s2">;</span>
+        <span class="s0">String blushName</span><span class="s2">;</span>
+        <span class="s0">String blushColor</span><span class="s2">;</span>
+        <span class="s0">String lipstickName</span><span class="s2">;</span>
+        <span class="s0">String lipstickColor</span><span class="s2">;</span>
+
+        <span class="s1">switch </span><span class="s2">(</span><span class="s0">tone</span><span class="s2">) {</span>
+            <span class="s1">case </span><span class="s3">&quot;Fair&quot;</span><span class="s2">:</span>
+                <span class="s0">foundationName </span><span class="s2">= </span><span class="s3">&quot;Porcelain&quot;</span><span class="s2">;</span>
+                <span class="s0">foundationColor </span><span class="s2">= </span><span class="s3">&quot;#F4D9C9&quot;</span><span class="s2">;</span>
+                <span class="s0">blushName </span><span class="s2">= </span><span class="s3">&quot;Baby Pink&quot;</span><span class="s2">;</span>
+                <span class="s0">blushColor </span><span class="s2">= </span><span class="s3">&quot;#F5A9C0&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickName </span><span class="s2">= </span><span class="s3">&quot;Soft Rose&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickColor </span><span class="s2">= </span><span class="s3">&quot;#C97987&quot;</span><span class="s2">;</span>
+                <span class="s1">break</span><span class="s2">;</span>
+
+            <span class="s1">case </span><span class="s3">&quot;Light&quot;</span><span class="s2">:</span>
+                <span class="s0">foundationName </span><span class="s2">= </span><span class="s3">&quot;Ivory&quot;</span><span class="s2">;</span>
+                <span class="s0">foundationColor </span><span class="s2">= </span><span class="s3">&quot;#E8C3A6&quot;</span><span class="s2">;</span>
+                <span class="s0">blushName </span><span class="s2">= </span><span class="s3">&quot;Peach Pink&quot;</span><span class="s2">;</span>
+                <span class="s0">blushColor </span><span class="s2">= </span><span class="s3">&quot;#F5A38E&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickName </span><span class="s2">= </span><span class="s3">&quot;Pink Nude&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickColor </span><span class="s2">= </span><span class="s3">&quot;#B76E78&quot;</span><span class="s2">;</span>
+                <span class="s1">break</span><span class="s2">;</span>
+
+            <span class="s1">case </span><span class="s3">&quot;Tan&quot;</span><span class="s2">:</span>
+                <span class="s0">foundationName </span><span class="s2">= </span><span class="s3">&quot;Warm Honey&quot;</span><span class="s2">;</span>
+                <span class="s0">foundationColor </span><span class="s2">= </span><span class="s3">&quot;#B77747&quot;</span><span class="s2">;</span>
+                <span class="s0">blushName </span><span class="s2">= </span><span class="s3">&quot;Terracotta&quot;</span><span class="s2">;</span>
+                <span class="s0">blushColor </span><span class="s2">= </span><span class="s3">&quot;#B96750&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickName </span><span class="s2">= </span><span class="s3">&quot;Caramel Nude&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickColor </span><span class="s2">= </span><span class="s3">&quot;#8E4E3C&quot;</span><span class="s2">;</span>
+                <span class="s1">break</span><span class="s2">;</span>
+
+            <span class="s1">case </span><span class="s3">&quot;Deep&quot;</span><span class="s2">:</span>
+                <span class="s0">foundationName </span><span class="s2">= </span><span class="s3">&quot;Cocoa&quot;</span><span class="s2">;</span>
+                <span class="s0">foundationColor </span><span class="s2">= </span><span class="s3">&quot;#805037&quot;</span><span class="s2">;</span>
+                <span class="s0">blushName </span><span class="s2">= </span><span class="s3">&quot;Berry&quot;</span><span class="s2">;</span>
+                <span class="s0">blushColor </span><span class="s2">= </span><span class="s3">&quot;#A44266&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickName </span><span class="s2">= </span><span class="s3">&quot;Burgundy&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickColor </span><span class="s2">= </span><span class="s3">&quot;#70283E&quot;</span><span class="s2">;</span>
+                <span class="s1">break</span><span class="s2">;</span>
+
+            <span class="s1">case </span><span class="s3">&quot;Rich Deep&quot;</span><span class="s2">:</span>
+                <span class="s0">foundationName </span><span class="s2">= </span><span class="s3">&quot;Espresso&quot;</span><span class="s2">;</span>
+                <span class="s0">foundationColor </span><span class="s2">= </span><span class="s3">&quot;#4E3028&quot;</span><span class="s2">;</span>
+                <span class="s0">blushName </span><span class="s2">= </span><span class="s3">&quot;Plum&quot;</span><span class="s2">;</span>
+                <span class="s0">blushColor </span><span class="s2">= </span><span class="s3">&quot;#753C65&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickName </span><span class="s2">= </span><span class="s3">&quot;Deep Wine&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickColor </span><span class="s2">= </span><span class="s3">&quot;#512438&quot;</span><span class="s2">;</span>
+                <span class="s1">break</span><span class="s2">;</span>
+
+            <span class="s1">default</span><span class="s2">:</span>
+                <span class="s0">foundationName </span><span class="s2">= </span><span class="s3">&quot;Natural Beige&quot;</span><span class="s2">;</span>
+                <span class="s0">foundationColor </span><span class="s2">= </span><span class="s3">&quot;#C8956D&quot;</span><span class="s2">;</span>
+                <span class="s0">blushName </span><span class="s2">= </span><span class="s3">&quot;Coral&quot;</span><span class="s2">;</span>
+                <span class="s0">blushColor </span><span class="s2">= </span><span class="s3">&quot;#ED846D&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickName </span><span class="s2">= </span><span class="s3">&quot;Rosewood&quot;</span><span class="s2">;</span>
+                <span class="s0">lipstickColor </span><span class="s2">= </span><span class="s3">&quot;#96535B&quot;</span><span class="s2">;</span>
+                <span class="s1">break</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">skinToneLabel </span><span class="s2">!= </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s0">skinToneLabel</span><span class="s2">.</span><span class="s0">setText</span><span class="s2">(</span><span class="s0">tone</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">foundationShade </span><span class="s2">!= </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s0">foundationShade</span><span class="s2">.</span><span class="s0">setText</span><span class="s2">(</span><span class="s3">&quot;Shade: &quot; </span><span class="s2">+ </span><span class="s0">foundationName</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">blushShade </span><span class="s2">!= </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s0">blushShade</span><span class="s2">.</span><span class="s0">setText</span><span class="s2">(</span><span class="s3">&quot;Shade: &quot; </span><span class="s2">+ </span><span class="s0">blushName</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">lipstickShade </span><span class="s2">!= </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s0">lipstickShade</span><span class="s2">.</span><span class="s0">setText</span><span class="s2">(</span><span class="s3">&quot;Shade: &quot; </span><span class="s2">+ </span><span class="s0">lipstickName</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">beautyMessage </span><span class="s2">!= </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s0">beautyMessage</span><span class="s2">.</span><span class="s0">setText</span><span class="s2">(</span>
+                    <span class="s3">&quot;Beautiful shades selected for your &quot;</span>
+                            <span class="s2">+ </span><span class="s0">tone </span><span class="s2">+ </span><span class="s3">&quot; skin tone.&quot;</span>
+            <span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">foundationContainer </span><span class="s2">!= </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s0">FoundationPreview foundation </span><span class="s2">= </span><span class="s1">new </span><span class="s0">FoundationPreview</span><span class="s2">();</span>
+            <span class="s0">foundation</span><span class="s2">.</span><span class="s0">setShadeColor</span><span class="s2">(</span><span class="s0">foundationColor</span><span class="s2">);</span>
+            <span class="s0">foundationContainer</span><span class="s2">.</span><span class="s0">getChildren</span><span class="s2">().</span><span class="s0">setAll</span><span class="s2">(</span><span class="s0">foundation</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">blushContainer </span><span class="s2">!= </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s0">BlushPreview blush </span><span class="s2">= </span><span class="s1">new </span><span class="s0">BlushPreview</span><span class="s2">();</span>
+            <span class="s0">blush</span><span class="s2">.</span><span class="s0">setShadeColor</span><span class="s2">(</span><span class="s0">blushColor</span><span class="s2">);</span>
+            <span class="s0">blushContainer</span><span class="s2">.</span><span class="s0">getChildren</span><span class="s2">().</span><span class="s0">setAll</span><span class="s2">(</span><span class="s0">blush</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">lipstickContainer </span><span class="s2">!= </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s0">LipstickPreview lipstick </span><span class="s2">= </span><span class="s1">new </span><span class="s0">LipstickPreview</span><span class="s2">();</span>
+            <span class="s0">lipstick</span><span class="s2">.</span><span class="s0">setShadeColor</span><span class="s2">(</span><span class="s0">lipstickColor</span><span class="s2">);</span>
+            <span class="s0">lipstickContainer</span><span class="s2">.</span><span class="s0">getChildren</span><span class="s2">().</span><span class="s0">setAll</span><span class="s2">(</span><span class="s0">lipstick</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleProducts</span><span class="s2">() {</span>
+
+        <span class="s0">Alert test </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Alert</span><span class="s2">(</span><span class="s0">Alert</span><span class="s2">.</span><span class="s0">AlertType</span><span class="s2">.</span><span class="s0">INFORMATION</span><span class="s2">);</span>
+        <span class="s0">test</span><span class="s2">.</span><span class="s0">setTitle</span><span class="s2">(</span><span class="s3">&quot;Navigation Test&quot;</span><span class="s2">);</span>
+        <span class="s0">test</span><span class="s2">.</span><span class="s0">setHeaderText</span><span class="s2">(</span><span class="s3">&quot;Shop Products button clicked!&quot;</span><span class="s2">);</span>
+        <span class="s0">test</span><span class="s2">.</span><span class="s0">setContentText</span><span class="s2">(</span>
+                <span class="s3">&quot;JavaFX received your click. Press OK to open the shop.&quot;</span>
+        <span class="s2">);</span>
+        <span class="s0">test</span><span class="s2">.</span><span class="s0">showAndWait</span><span class="s2">();</span>
+
+        <span class="s1">try </span><span class="s2">{</span>
+            <span class="s0">SceneManager</span><span class="s2">.</span><span class="s0">switchScene</span><span class="s2">(</span><span class="s3">&quot;products.fxml&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s1">catch </span><span class="s2">(</span><span class="s0">IOException </span><span class="s2">| </span><span class="s0">RuntimeException e</span><span class="s2">) {</span>
+            <span class="s0">e</span><span class="s2">.</span><span class="s0">printStackTrace</span><span class="s2">();</span>
+
+            <span class="s0">Alert error </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Alert</span><span class="s2">(</span><span class="s0">Alert</span><span class="s2">.</span><span class="s0">AlertType</span><span class="s2">.</span><span class="s0">ERROR</span><span class="s2">);</span>
+            <span class="s0">error</span><span class="s2">.</span><span class="s0">setTitle</span><span class="s2">(</span><span class="s3">&quot;Shop Products Error&quot;</span><span class="s2">);</span>
+            <span class="s0">error</span><span class="s2">.</span><span class="s0">setHeaderText</span><span class="s2">(</span><span class="s3">&quot;Cannot open products.fxml&quot;</span><span class="s2">);</span>
+            <span class="s0">error</span><span class="s2">.</span><span class="s0">setContentText</span><span class="s2">(</span><span class="s0">e</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">());</span>
+            <span class="s0">error</span><span class="s2">.</span><span class="s0">showAndWait</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleShopProducts</span><span class="s2">() {</span>
+        <span class="s0">handleProducts</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleShopNow</span><span class="s2">() {</span>
+        <span class="s0">handleProducts</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleCart</span><span class="s2">() {</span>
+        <span class="s1">new </span><span class="s0">Alert</span><span class="s2">(</span>
+                <span class="s0">Alert</span><span class="s2">.</span><span class="s0">AlertType</span><span class="s2">.</span><span class="s0">INFORMATION</span><span class="s2">,</span>
+                <span class="s3">&quot;Your dedicated cart page is not ready yet.&quot;</span>
+        <span class="s2">).</span><span class="s0">showAndWait</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleLogout</span><span class="s2">() </span><span class="s1">throws </span><span class="s0">IOException </span><span class="s2">{</span>
+        <span class="s0">SceneManager</span><span class="s2">.</span><span class="s0">switchScene</span><span class="s2">(</span><span class="s3">&quot;login.fxml&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

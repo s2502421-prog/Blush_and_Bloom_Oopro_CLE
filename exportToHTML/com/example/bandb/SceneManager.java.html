@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>SceneManager.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SceneManager.java</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">package </span><span class="s0">com</span><span class="s2">.</span><span class="s0">example</span><span class="s2">.</span><span class="s0">bandb</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">application</span><span class="s2">.</span><span class="s0">Platform</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">fxml</span><span class="s2">.</span><span class="s0">FXMLLoader</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">Parent</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">Scene</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">stage</span><span class="s2">.</span><span class="s0">Stage</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">io</span><span class="s2">.</span><span class="s0">IOException</span><span class="s2">;</span>
+
+<span class="s1">public class </span><span class="s0">SceneManager </span><span class="s2">{</span>
+
+    <span class="s1">private static </span><span class="s0">Stage mainStage</span><span class="s2">;</span>
+
+    <span class="s1">public static void </span><span class="s0">setMainStage</span><span class="s2">(</span><span class="s0">Stage stage</span><span class="s2">) {</span>
+        <span class="s0">mainStage </span><span class="s2">= </span><span class="s0">stage</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public static void </span><span class="s0">setStage</span><span class="s2">(</span><span class="s0">Stage stage</span><span class="s2">) {</span>
+        <span class="s0">setMainStage</span><span class="s2">(</span><span class="s0">stage</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public static void </span><span class="s0">switchScene</span><span class="s2">(</span><span class="s0">String fxmlFile</span><span class="s2">)</span>
+            <span class="s1">throws </span><span class="s0">IOException </span><span class="s2">{</span>
+
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">mainStage </span><span class="s2">== </span><span class="s1">null</span><span class="s2">) {</span>
+            <span class="s1">throw new </span><span class="s0">IllegalStateException</span><span class="s2">(</span>
+                    <span class="s3">&quot;Main stage has not been initialized.&quot;</span>
+            <span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s0">FXMLLoader loader </span><span class="s2">= </span><span class="s1">new </span><span class="s0">FXMLLoader</span><span class="s2">(</span>
+                <span class="s0">SceneManager</span><span class="s2">.</span><span class="s1">class</span><span class="s2">.</span><span class="s0">getResource</span><span class="s2">(</span><span class="s0">fxmlFile</span><span class="s2">)</span>
+        <span class="s2">);</span>
+
+        <span class="s0">Parent root </span><span class="s2">= </span><span class="s0">loader</span><span class="s2">.</span><span class="s0">load</span><span class="s2">();</span>
+
+        <span class="s0">Scene scene </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Scene</span><span class="s2">(</span><span class="s0">root</span><span class="s2">);</span>
+
+        <span class="s0">mainStage</span><span class="s2">.</span><span class="s0">setScene</span><span class="s2">(</span><span class="s0">scene</span><span class="s2">);</span>
+        <span class="s0">mainStage</span><span class="s2">.</span><span class="s0">setMaximized</span><span class="s2">(</span><span class="s1">true</span><span class="s2">);</span>
+        <span class="s0">mainStage</span><span class="s2">.</span><span class="s0">setFullScreenExitHint</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+
+        <span class="s1">if </span><span class="s2">(!</span><span class="s0">mainStage</span><span class="s2">.</span><span class="s0">isShowing</span><span class="s2">()) {</span>
+            <span class="s0">mainStage</span><span class="s2">.</span><span class="s0">show</span><span class="s2">();</span>
+        <span class="s2">}</span>
+
+        <span class="s0">Platform</span><span class="s2">.</span><span class="s0">runLater</span><span class="s2">(() </span><span class="s0">-&gt; </span><span class="s2">{</span>
+            <span class="s0">mainStage</span><span class="s2">.</span><span class="s0">setFullScreen</span><span class="s2">(</span><span class="s1">true</span><span class="s2">);</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

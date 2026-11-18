@@ -1,0 +1,527 @@
+<html>
+<head>
+<title>ProductsController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ProductsController.java</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">package </span><span class="s0">com</span><span class="s2">.</span><span class="s0">example</span><span class="s2">.</span><span class="s0">bandb</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">fxml</span><span class="s2">.</span><span class="s0">FXML</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">geometry</span><span class="s2">.</span><span class="s0">Insets</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">geometry</span><span class="s2">.</span><span class="s0">Pos</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">Node</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">Alert</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">Button</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">Label</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">control</span><span class="s2">.</span><span class="s0">ScrollPane</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">layout</span><span class="s2">.*;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">paint</span><span class="s2">.</span><span class="s0">Color</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">javafx</span><span class="s2">.</span><span class="s0">scene</span><span class="s2">.</span><span class="s0">shape</span><span class="s2">.</span><span class="s0">Circle</span><span class="s2">;</span>
+
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">io</span><span class="s2">.</span><span class="s0">IOException</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">util</span><span class="s2">.</span><span class="s0">ArrayList</span><span class="s2">;</span>
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">util</span><span class="s2">.</span><span class="s0">List</span><span class="s2">;</span>
+
+<span class="s1">public class </span><span class="s0">ProductsController </span><span class="s2">{</span>
+
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">FlowPane productGrid</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Label skinToneLabel</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Label productCountLabel</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Button cartCountButton</span><span class="s2">;</span>
+
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Button allButton</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Button foundationButton</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Button blushButton</span><span class="s2">;</span>
+    <span class="s0">@FXML </span><span class="s1">private </span><span class="s0">Button lipstickButton</span><span class="s2">;</span>
+
+    <span class="s1">private final </span><span class="s0">List</span><span class="s2">&lt;</span><span class="s0">ShopProduct</span><span class="s2">&gt; </span><span class="s0">products </span><span class="s2">=</span>
+            <span class="s1">new </span><span class="s0">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+    <span class="s1">private </span><span class="s0">String selectedSkinTone </span><span class="s2">= </span><span class="s3">&quot;Medium&quot;</span><span class="s2">;</span>
+    <span class="s1">private </span><span class="s0">String activeCategory </span><span class="s2">= </span><span class="s3">&quot;All&quot;</span><span class="s2">;</span>
+
+    <span class="s1">private static class </span><span class="s0">ShopProduct </span><span class="s2">{</span>
+
+        <span class="s1">final </span><span class="s0">String category</span><span class="s2">;</span>
+        <span class="s1">final </span><span class="s0">String name</span><span class="s2">;</span>
+        <span class="s1">final </span><span class="s0">String shade</span><span class="s2">;</span>
+        <span class="s1">final </span><span class="s0">String hexColor</span><span class="s2">;</span>
+        <span class="s1">final </span><span class="s0">String recommendedTone</span><span class="s2">;</span>
+        <span class="s1">final double </span><span class="s0">price</span><span class="s2">;</span>
+
+        <span class="s0">ShopProduct</span><span class="s2">(</span>
+                <span class="s0">String category</span><span class="s2">,</span>
+                <span class="s0">String name</span><span class="s2">,</span>
+                <span class="s0">String shade</span><span class="s2">,</span>
+                <span class="s0">String hexColor</span><span class="s2">,</span>
+                <span class="s0">String recommendedTone</span><span class="s2">,</span>
+                <span class="s1">double </span><span class="s0">price</span>
+        <span class="s2">) {</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">category </span><span class="s2">= </span><span class="s0">category</span><span class="s2">;</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">name </span><span class="s2">= </span><span class="s0">name</span><span class="s2">;</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">shade </span><span class="s2">= </span><span class="s0">shade</span><span class="s2">;</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">hexColor </span><span class="s2">= </span><span class="s0">hexColor</span><span class="s2">;</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">recommendedTone </span><span class="s2">= </span><span class="s0">recommendedTone</span><span class="s2">;</span>
+            <span class="s1">this</span><span class="s2">.</span><span class="s0">price </span><span class="s2">= </span><span class="s0">price</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">public void </span><span class="s0">initialize</span><span class="s2">() {</span>
+
+        <span class="s0">String tone </span><span class="s2">=</span>
+                <span class="s0">SkinToneController</span><span class="s2">.</span><span class="s0">getSelectedSkinTone</span><span class="s2">();</span>
+
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">tone </span><span class="s2">!= </span><span class="s1">null </span><span class="s2">&amp;&amp; !</span><span class="s0">tone</span><span class="s2">.</span><span class="s0">isBlank</span><span class="s2">()) {</span>
+            <span class="s0">selectedSkinTone </span><span class="s2">= </span><span class="s0">tone</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">skinToneLabel</span><span class="s2">.</span><span class="s0">setText</span><span class="s2">(</span>
+                <span class="s3">&quot;Your skin tone: &quot; </span><span class="s2">+ </span><span class="s0">selectedSkinTone</span>
+        <span class="s2">);</span>
+
+        <span class="s0">loadProducts</span><span class="s2">();</span>
+        <span class="s0">displayProducts</span><span class="s2">(</span><span class="s3">&quot;All&quot;</span><span class="s2">);</span>
+        <span class="s0">updateCartCount</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private void </span><span class="s0">loadProducts</span><span class="s2">() {</span>
+
+        <span class="s0">products</span><span class="s2">.</span><span class="s0">clear</span><span class="s2">();</span>
+
+        <span class="s4">// GLOW FOUNDATION</span>
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Foundation&quot;</span><span class="s2">, </span><span class="s3">&quot;Glow Foundation&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Porcelain&quot;</span><span class="s2">, </span><span class="s3">&quot;#F4D9C9&quot;</span><span class="s2">, </span><span class="s3">&quot;Fair&quot;</span><span class="s2">, </span><span class="s5">399</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Foundation&quot;</span><span class="s2">, </span><span class="s3">&quot;Glow Foundation&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Ivory&quot;</span><span class="s2">, </span><span class="s3">&quot;#E8C3A6&quot;</span><span class="s2">, </span><span class="s3">&quot;Light&quot;</span><span class="s2">, </span><span class="s5">399</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Foundation&quot;</span><span class="s2">, </span><span class="s3">&quot;Glow Foundation&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Natural Beige&quot;</span><span class="s2">, </span><span class="s3">&quot;#C8956D&quot;</span><span class="s2">, </span><span class="s3">&quot;Medium&quot;</span><span class="s2">, </span><span class="s5">399</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Foundation&quot;</span><span class="s2">, </span><span class="s3">&quot;Glow Foundation&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Warm Honey&quot;</span><span class="s2">, </span><span class="s3">&quot;#B77747&quot;</span><span class="s2">, </span><span class="s3">&quot;Tan&quot;</span><span class="s2">, </span><span class="s5">399</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Foundation&quot;</span><span class="s2">, </span><span class="s3">&quot;Glow Foundation&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Cocoa&quot;</span><span class="s2">, </span><span class="s3">&quot;#805037&quot;</span><span class="s2">, </span><span class="s3">&quot;Deep&quot;</span><span class="s2">, </span><span class="s5">399</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Foundation&quot;</span><span class="s2">, </span><span class="s3">&quot;Glow Foundation&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Espresso&quot;</span><span class="s2">, </span><span class="s3">&quot;#4E3028&quot;</span><span class="s2">, </span><span class="s3">&quot;Rich Deep&quot;</span><span class="s2">, </span><span class="s5">399</span><span class="s2">);</span>
+
+        <span class="s4">// DREAMY BLUSH</span>
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Blush&quot;</span><span class="s2">, </span><span class="s3">&quot;Dreamy Blush&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Baby Pink&quot;</span><span class="s2">, </span><span class="s3">&quot;#F5A9C0&quot;</span><span class="s2">, </span><span class="s3">&quot;Fair&quot;</span><span class="s2">, </span><span class="s5">249</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Blush&quot;</span><span class="s2">, </span><span class="s3">&quot;Dreamy Blush&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Peach Pink&quot;</span><span class="s2">, </span><span class="s3">&quot;#F5A38E&quot;</span><span class="s2">, </span><span class="s3">&quot;Light&quot;</span><span class="s2">, </span><span class="s5">249</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Blush&quot;</span><span class="s2">, </span><span class="s3">&quot;Dreamy Blush&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Coral&quot;</span><span class="s2">, </span><span class="s3">&quot;#ED846D&quot;</span><span class="s2">, </span><span class="s3">&quot;Medium&quot;</span><span class="s2">, </span><span class="s5">249</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Blush&quot;</span><span class="s2">, </span><span class="s3">&quot;Dreamy Blush&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Terracotta&quot;</span><span class="s2">, </span><span class="s3">&quot;#B96750&quot;</span><span class="s2">, </span><span class="s3">&quot;Tan&quot;</span><span class="s2">, </span><span class="s5">249</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Blush&quot;</span><span class="s2">, </span><span class="s3">&quot;Dreamy Blush&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Berry&quot;</span><span class="s2">, </span><span class="s3">&quot;#A44266&quot;</span><span class="s2">, </span><span class="s3">&quot;Deep&quot;</span><span class="s2">, </span><span class="s5">249</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Blush&quot;</span><span class="s2">, </span><span class="s3">&quot;Dreamy Blush&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Plum&quot;</span><span class="s2">, </span><span class="s3">&quot;#753C65&quot;</span><span class="s2">, </span><span class="s3">&quot;Rich Deep&quot;</span><span class="s2">, </span><span class="s5">249</span><span class="s2">);</span>
+
+        <span class="s4">// BLOOM KISS LIPSTICK</span>
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Lipstick&quot;</span><span class="s2">, </span><span class="s3">&quot;Bloom Kiss Lipstick&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Soft Rose&quot;</span><span class="s2">, </span><span class="s3">&quot;#C97987&quot;</span><span class="s2">, </span><span class="s3">&quot;Fair&quot;</span><span class="s2">, </span><span class="s5">199</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Lipstick&quot;</span><span class="s2">, </span><span class="s3">&quot;Bloom Kiss Lipstick&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Pink Nude&quot;</span><span class="s2">, </span><span class="s3">&quot;#B76E78&quot;</span><span class="s2">, </span><span class="s3">&quot;Light&quot;</span><span class="s2">, </span><span class="s5">199</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Lipstick&quot;</span><span class="s2">, </span><span class="s3">&quot;Bloom Kiss Lipstick&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Rosewood&quot;</span><span class="s2">, </span><span class="s3">&quot;#96535B&quot;</span><span class="s2">, </span><span class="s3">&quot;Medium&quot;</span><span class="s2">, </span><span class="s5">199</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Lipstick&quot;</span><span class="s2">, </span><span class="s3">&quot;Bloom Kiss Lipstick&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Caramel Nude&quot;</span><span class="s2">, </span><span class="s3">&quot;#8E4E3C&quot;</span><span class="s2">, </span><span class="s3">&quot;Tan&quot;</span><span class="s2">, </span><span class="s5">199</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Lipstick&quot;</span><span class="s2">, </span><span class="s3">&quot;Bloom Kiss Lipstick&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Burgundy&quot;</span><span class="s2">, </span><span class="s3">&quot;#70283E&quot;</span><span class="s2">, </span><span class="s3">&quot;Deep&quot;</span><span class="s2">, </span><span class="s5">199</span><span class="s2">);</span>
+
+        <span class="s0">add</span><span class="s2">(</span><span class="s3">&quot;Lipstick&quot;</span><span class="s2">, </span><span class="s3">&quot;Bloom Kiss Lipstick&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Deep Wine&quot;</span><span class="s2">, </span><span class="s3">&quot;#512438&quot;</span><span class="s2">, </span><span class="s3">&quot;Rich Deep&quot;</span><span class="s2">, </span><span class="s5">199</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private void </span><span class="s0">add</span><span class="s2">(</span>
+            <span class="s0">String category</span><span class="s2">,</span>
+            <span class="s0">String name</span><span class="s2">,</span>
+            <span class="s0">String shade</span><span class="s2">,</span>
+            <span class="s0">String color</span><span class="s2">,</span>
+            <span class="s0">String tone</span><span class="s2">,</span>
+            <span class="s1">double </span><span class="s0">price</span>
+    <span class="s2">) {</span>
+        <span class="s0">products</span><span class="s2">.</span><span class="s0">add</span><span class="s2">(</span><span class="s1">new </span><span class="s0">ShopProduct</span><span class="s2">(</span>
+                <span class="s0">category</span><span class="s2">, </span><span class="s0">name</span><span class="s2">, </span><span class="s0">shade</span><span class="s2">,</span>
+                <span class="s0">color</span><span class="s2">, </span><span class="s0">tone</span><span class="s2">, </span><span class="s0">price</span>
+        <span class="s2">));</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private void </span><span class="s0">displayProducts</span><span class="s2">(</span><span class="s0">String category</span><span class="s2">) {</span>
+
+        <span class="s0">activeCategory </span><span class="s2">= </span><span class="s0">category</span><span class="s2">;</span>
+        <span class="s0">productGrid</span><span class="s2">.</span><span class="s0">getChildren</span><span class="s2">().</span><span class="s0">clear</span><span class="s2">();</span>
+
+        <span class="s1">int </span><span class="s0">count </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+
+        <span class="s1">for </span><span class="s2">(</span><span class="s0">ShopProduct product </span><span class="s2">: </span><span class="s0">products</span><span class="s2">) {</span>
+
+            <span class="s1">if </span><span class="s2">(!</span><span class="s0">category</span><span class="s2">.</span><span class="s0">equals</span><span class="s2">(</span><span class="s3">&quot;All&quot;</span><span class="s2">)</span>
+                    <span class="s2">&amp;&amp; !</span><span class="s0">product</span><span class="s2">.</span><span class="s0">category</span><span class="s2">.</span><span class="s0">equals</span><span class="s2">(</span><span class="s0">category</span><span class="s2">)) {</span>
+                <span class="s1">continue</span><span class="s2">;</span>
+            <span class="s2">}</span>
+
+            <span class="s0">productGrid</span><span class="s2">.</span><span class="s0">getChildren</span><span class="s2">().</span><span class="s0">add</span><span class="s2">(</span>
+                    <span class="s0">createProductCard</span><span class="s2">(</span><span class="s0">product</span><span class="s2">)</span>
+            <span class="s2">);</span>
+
+            <span class="s0">count</span><span class="s2">++;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">productCountLabel</span><span class="s2">.</span><span class="s0">setText</span><span class="s2">(</span>
+                <span class="s0">count </span><span class="s2">+ </span><span class="s3">&quot; shades available&quot;</span>
+        <span class="s2">);</span>
+
+        <span class="s0">updateFilterButtons</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">VBox createProductCard</span><span class="s2">(</span><span class="s0">ShopProduct product</span><span class="s2">) {</span>
+
+        <span class="s1">boolean </span><span class="s0">recommended </span><span class="s2">=</span>
+                <span class="s0">product</span><span class="s2">.</span><span class="s0">recommendedTone</span><span class="s2">.</span><span class="s0">equalsIgnoreCase</span><span class="s2">(</span>
+                        <span class="s0">selectedSkinTone</span>
+                <span class="s2">);</span>
+
+        <span class="s0">VBox card </span><span class="s2">= </span><span class="s1">new </span><span class="s0">VBox</span><span class="s2">(</span><span class="s5">9</span><span class="s2">);</span>
+        <span class="s0">card</span><span class="s2">.</span><span class="s0">setAlignment</span><span class="s2">(</span><span class="s0">Pos</span><span class="s2">.</span><span class="s0">TOP_CENTER</span><span class="s2">);</span>
+        <span class="s0">card</span><span class="s2">.</span><span class="s0">setPadding</span><span class="s2">(</span><span class="s1">new </span><span class="s0">Insets</span><span class="s2">(</span><span class="s5">14</span><span class="s2">));</span>
+
+        <span class="s0">card</span><span class="s2">.</span><span class="s0">setPrefWidth</span><span class="s2">(</span><span class="s5">225</span><span class="s2">);</span>
+        <span class="s0">card</span><span class="s2">.</span><span class="s0">setMinWidth</span><span class="s2">(</span><span class="s5">225</span><span class="s2">);</span>
+        <span class="s0">card</span><span class="s2">.</span><span class="s0">setMaxWidth</span><span class="s2">(</span><span class="s5">225</span><span class="s2">);</span>
+
+        <span class="s0">card</span><span class="s2">.</span><span class="s0">setPrefHeight</span><span class="s2">(</span><span class="s5">455</span><span class="s2">);</span>
+        <span class="s0">card</span><span class="s2">.</span><span class="s0">setMinHeight</span><span class="s2">(</span><span class="s5">455</span><span class="s2">);</span>
+        <span class="s0">card</span><span class="s2">.</span><span class="s0">setMaxHeight</span><span class="s2">(</span><span class="s5">455</span><span class="s2">);</span>
+
+        <span class="s0">String borderColor </span><span class="s2">=</span>
+                <span class="s0">recommended </span><span class="s2">? </span><span class="s3">&quot;#D97DA5&quot; </span><span class="s2">: </span><span class="s3">&quot;#F2DAE4&quot;</span><span class="s2">;</span>
+
+        <span class="s0">card</span><span class="s2">.</span><span class="s0">setStyle</span><span class="s2">(</span>
+                <span class="s3">&quot;-fx-background-color: white;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-background-radius: 18;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-border-color: &quot; </span><span class="s2">+ </span><span class="s0">borderColor </span><span class="s2">+ </span><span class="s3">&quot;;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-border-width: &quot; </span><span class="s2">+</span>
+                        <span class="s2">(</span><span class="s0">recommended </span><span class="s2">? </span><span class="s3">&quot;2&quot; </span><span class="s2">: </span><span class="s3">&quot;1&quot;</span><span class="s2">) + </span><span class="s3">&quot;;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-border-radius: 18;&quot;</span>
+        <span class="s2">);</span>
+
+        <span class="s0">Label recommendation </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Label</span><span class="s2">(</span>
+                <span class="s0">recommended</span>
+                        <span class="s2">? </span><span class="s3">&quot;♥ RECOMMENDED FOR YOU&quot;</span>
+                        <span class="s2">: </span><span class="s3">&quot; &quot;</span>
+        <span class="s2">);</span>
+
+        <span class="s0">recommendation</span><span class="s2">.</span><span class="s0">setStyle</span><span class="s2">(</span>
+                <span class="s3">&quot;-fx-font-size: 10px;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-font-weight: bold;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-text-fill: #C45D89;&quot;</span>
+        <span class="s2">);</span>
+
+        <span class="s0">StackPane illustrationArea </span><span class="s2">= </span><span class="s1">new </span><span class="s0">StackPane</span><span class="s2">();</span>
+
+        <span class="s0">illustrationArea</span><span class="s2">.</span><span class="s0">setPrefSize</span><span class="s2">(</span><span class="s5">190</span><span class="s2">, </span><span class="s5">220</span><span class="s2">);</span>
+        <span class="s0">illustrationArea</span><span class="s2">.</span><span class="s0">setMinSize</span><span class="s2">(</span><span class="s5">190</span><span class="s2">, </span><span class="s5">220</span><span class="s2">);</span>
+        <span class="s0">illustrationArea</span><span class="s2">.</span><span class="s0">setMaxSize</span><span class="s2">(</span><span class="s5">190</span><span class="s2">, </span><span class="s5">220</span><span class="s2">);</span>
+
+        <span class="s0">illustrationArea</span><span class="s2">.</span><span class="s0">setStyle</span><span class="s2">(</span>
+                <span class="s3">&quot;-fx-background-color: #FFF5F9;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-background-radius: 14;&quot;</span>
+        <span class="s2">);</span>
+
+        <span class="s0">illustrationArea</span><span class="s2">.</span><span class="s0">getChildren</span><span class="s2">().</span><span class="s0">add</span><span class="s2">(</span>
+                <span class="s0">createIllustration</span><span class="s2">(</span><span class="s0">product</span><span class="s2">)</span>
+        <span class="s2">);</span>
+
+        <span class="s0">Label categoryLabel </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Label</span><span class="s2">(</span>
+                <span class="s0">product</span><span class="s2">.</span><span class="s0">category</span><span class="s2">.</span><span class="s0">toUpperCase</span><span class="s2">()</span>
+        <span class="s2">);</span>
+
+        <span class="s0">categoryLabel</span><span class="s2">.</span><span class="s0">setStyle</span><span class="s2">(</span>
+                <span class="s3">&quot;-fx-font-size: 10px;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-text-fill: #B67B91;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-font-weight: bold;&quot;</span>
+        <span class="s2">);</span>
+
+        <span class="s0">Label nameLabel </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Label</span><span class="s2">(</span><span class="s0">product</span><span class="s2">.</span><span class="s0">name</span><span class="s2">);</span>
+
+        <span class="s0">nameLabel</span><span class="s2">.</span><span class="s0">setStyle</span><span class="s2">(</span>
+                <span class="s3">&quot;-fx-font-size: 15px;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-font-weight: bold;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-text-fill: #563C49;&quot;</span>
+        <span class="s2">);</span>
+
+        <span class="s0">Label shadeLabel </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Label</span><span class="s2">(</span>
+                <span class="s3">&quot;Shade: &quot; </span><span class="s2">+ </span><span class="s0">product</span><span class="s2">.</span><span class="s0">shade</span>
+        <span class="s2">);</span>
+
+        <span class="s0">shadeLabel</span><span class="s2">.</span><span class="s0">setStyle</span><span class="s2">(</span>
+                <span class="s3">&quot;-fx-font-size: 12px;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-text-fill: #846A76;&quot;</span>
+        <span class="s2">);</span>
+
+        <span class="s0">Circle swatch </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Circle</span><span class="s2">(</span><span class="s5">7</span><span class="s2">);</span>
+        <span class="s0">swatch</span><span class="s2">.</span><span class="s0">setFill</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s0">product</span><span class="s2">.</span><span class="s0">hexColor</span><span class="s2">));</span>
+        <span class="s0">swatch</span><span class="s2">.</span><span class="s0">setStroke</span><span class="s2">(</span><span class="s0">Color</span><span class="s2">.</span><span class="s0">web</span><span class="s2">(</span><span class="s3">&quot;#E4C7D3&quot;</span><span class="s2">));</span>
+
+        <span class="s0">HBox shadeRow </span><span class="s2">= </span><span class="s1">new </span><span class="s0">HBox</span><span class="s2">(</span>
+                <span class="s5">7</span><span class="s2">, </span><span class="s0">swatch</span><span class="s2">, </span><span class="s0">shadeLabel</span>
+        <span class="s2">);</span>
+
+        <span class="s0">shadeRow</span><span class="s2">.</span><span class="s0">setAlignment</span><span class="s2">(</span><span class="s0">Pos</span><span class="s2">.</span><span class="s0">CENTER</span><span class="s2">);</span>
+
+        <span class="s0">Label priceLabel </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Label</span><span class="s2">(</span>
+                <span class="s0">String</span><span class="s2">.</span><span class="s0">format</span><span class="s2">(</span><span class="s3">&quot;₱%.2f&quot;</span><span class="s2">, </span><span class="s0">product</span><span class="s2">.</span><span class="s0">price</span><span class="s2">)</span>
+        <span class="s2">);</span>
+
+        <span class="s0">priceLabel</span><span class="s2">.</span><span class="s0">setStyle</span><span class="s2">(</span>
+                <span class="s3">&quot;-fx-font-size: 17px;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-font-weight: bold;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-text-fill: #C45D89;&quot;</span>
+        <span class="s2">);</span>
+
+        <span class="s0">Region spacer </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Region</span><span class="s2">();</span>
+        <span class="s0">VBox</span><span class="s2">.</span><span class="s0">setVgrow</span><span class="s2">(</span><span class="s0">spacer</span><span class="s2">, </span><span class="s0">Priority</span><span class="s2">.</span><span class="s0">ALWAYS</span><span class="s2">);</span>
+
+        <span class="s0">Button addButton </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Button</span><span class="s2">(</span><span class="s3">&quot;Add to Cart&quot;</span><span class="s2">);</span>
+
+        <span class="s0">addButton</span><span class="s2">.</span><span class="s0">setMaxWidth</span><span class="s2">(</span><span class="s0">Double</span><span class="s2">.</span><span class="s0">MAX_VALUE</span><span class="s2">);</span>
+        <span class="s0">addButton</span><span class="s2">.</span><span class="s0">setPrefHeight</span><span class="s2">(</span><span class="s5">38</span><span class="s2">);</span>
+
+        <span class="s0">addButton</span><span class="s2">.</span><span class="s0">setStyle</span><span class="s2">(</span>
+                <span class="s3">&quot;-fx-background-color: #E9A6C0;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-text-fill: white;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-font-weight: bold;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-background-radius: 10;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-cursor: hand;&quot;</span>
+        <span class="s2">);</span>
+
+        <span class="s0">addButton</span><span class="s2">.</span><span class="s0">setOnAction</span><span class="s2">(</span><span class="s0">event -&gt;</span>
+                <span class="s0">addToCart</span><span class="s2">(</span><span class="s0">product</span><span class="s2">)</span>
+        <span class="s2">);</span>
+
+        <span class="s0">card</span><span class="s2">.</span><span class="s0">getChildren</span><span class="s2">().</span><span class="s0">addAll</span><span class="s2">(</span>
+                <span class="s0">recommendation</span><span class="s2">,</span>
+                <span class="s0">illustrationArea</span><span class="s2">,</span>
+                <span class="s0">categoryLabel</span><span class="s2">,</span>
+                <span class="s0">nameLabel</span><span class="s2">,</span>
+                <span class="s0">shadeRow</span><span class="s2">,</span>
+                <span class="s0">priceLabel</span><span class="s2">,</span>
+                <span class="s0">spacer</span><span class="s2">,</span>
+                <span class="s0">addButton</span>
+        <span class="s2">);</span>
+
+        <span class="s1">return </span><span class="s0">card</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">Node createIllustration</span><span class="s2">(</span><span class="s0">ShopProduct product</span><span class="s2">) {</span>
+
+        <span class="s1">switch </span><span class="s2">(</span><span class="s0">product</span><span class="s2">.</span><span class="s0">category</span><span class="s2">) {</span>
+
+            <span class="s1">case </span><span class="s3">&quot;Foundation&quot;</span><span class="s2">:</span>
+                <span class="s0">FoundationPreview foundation </span><span class="s2">=</span>
+                        <span class="s1">new </span><span class="s0">FoundationPreview</span><span class="s2">();</span>
+
+                <span class="s0">foundation</span><span class="s2">.</span><span class="s0">setShadeColor</span><span class="s2">(</span>
+                        <span class="s0">product</span><span class="s2">.</span><span class="s0">hexColor</span>
+                <span class="s2">);</span>
+
+                <span class="s1">return </span><span class="s0">foundation</span><span class="s2">;</span>
+
+            <span class="s1">case </span><span class="s3">&quot;Blush&quot;</span><span class="s2">:</span>
+                <span class="s0">BlushPreview blush </span><span class="s2">=</span>
+                        <span class="s1">new </span><span class="s0">BlushPreview</span><span class="s2">();</span>
+
+                <span class="s0">blush</span><span class="s2">.</span><span class="s0">setShadeColor</span><span class="s2">(</span>
+                        <span class="s0">product</span><span class="s2">.</span><span class="s0">hexColor</span>
+                <span class="s2">);</span>
+
+                <span class="s1">return </span><span class="s0">blush</span><span class="s2">;</span>
+
+            <span class="s1">case </span><span class="s3">&quot;Lipstick&quot;</span><span class="s2">:</span>
+                <span class="s0">LipstickPreview lipstick </span><span class="s2">=</span>
+                        <span class="s1">new </span><span class="s0">LipstickPreview</span><span class="s2">();</span>
+
+                <span class="s0">lipstick</span><span class="s2">.</span><span class="s0">setShadeColor</span><span class="s2">(</span>
+                        <span class="s0">product</span><span class="s2">.</span><span class="s0">hexColor</span>
+                <span class="s2">);</span>
+
+                <span class="s1">return </span><span class="s0">lipstick</span><span class="s2">;</span>
+
+            <span class="s1">default</span><span class="s2">:</span>
+                <span class="s1">return new </span><span class="s0">Label</span><span class="s2">(</span><span class="s3">&quot;Makeup&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private void </span><span class="s0">addToCart</span><span class="s2">(</span><span class="s0">ShopProduct product</span><span class="s2">) {</span>
+
+        <span class="s0">ShoppingCart</span><span class="s2">.</span><span class="s0">addItem</span><span class="s2">(</span>
+                <span class="s0">product</span><span class="s2">.</span><span class="s0">category</span><span class="s2">,</span>
+                <span class="s0">product</span><span class="s2">.</span><span class="s0">name</span><span class="s2">,</span>
+                <span class="s0">product</span><span class="s2">.</span><span class="s0">shade</span><span class="s2">,</span>
+                <span class="s0">product</span><span class="s2">.</span><span class="s0">price</span>
+        <span class="s2">);</span>
+
+        <span class="s0">updateCartCount</span><span class="s2">();</span>
+
+        <span class="s0">Alert alert </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Alert</span><span class="s2">(</span>
+                <span class="s0">Alert</span><span class="s2">.</span><span class="s0">AlertType</span><span class="s2">.</span><span class="s0">INFORMATION</span>
+        <span class="s2">);</span>
+
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">setTitle</span><span class="s2">(</span><span class="s3">&quot;Blush &amp; Bloom&quot;</span><span class="s2">);</span>
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">setHeaderText</span><span class="s2">(</span><span class="s3">&quot;Added to Cart! ♥&quot;</span><span class="s2">);</span>
+
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">setContentText</span><span class="s2">(</span>
+                <span class="s0">product</span><span class="s2">.</span><span class="s0">name </span><span class="s2">+ </span><span class="s3">&quot;</span><span class="s1">\n</span><span class="s3">&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;Shade: &quot; </span><span class="s2">+ </span><span class="s0">product</span><span class="s2">.</span><span class="s0">shade </span><span class="s2">+ </span><span class="s3">&quot;</span><span class="s1">\n</span><span class="s3">&quot; </span><span class="s2">+</span>
+                        <span class="s0">String</span><span class="s2">.</span><span class="s0">format</span><span class="s2">(</span>
+                                <span class="s3">&quot;Price: ₱%.2f&quot;</span><span class="s2">,</span>
+                                <span class="s0">product</span><span class="s2">.</span><span class="s0">price</span>
+                        <span class="s2">)</span>
+        <span class="s2">);</span>
+
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">showAndWait</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private void </span><span class="s0">updateCartCount</span><span class="s2">() {</span>
+
+        <span class="s0">cartCountButton</span><span class="s2">.</span><span class="s0">setText</span><span class="s2">(</span>
+                <span class="s3">&quot;My Cart (&quot; </span><span class="s2">+</span>
+                        <span class="s0">ShoppingCart</span><span class="s2">.</span><span class="s0">getTotalQuantity</span><span class="s2">() +</span>
+                        <span class="s3">&quot;)&quot;</span>
+        <span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private void </span><span class="s0">updateFilterButtons</span><span class="s2">() {</span>
+
+        <span class="s0">styleFilter</span><span class="s2">(</span><span class="s0">allButton</span><span class="s2">, </span><span class="s3">&quot;All&quot;</span><span class="s2">);</span>
+        <span class="s0">styleFilter</span><span class="s2">(</span><span class="s0">foundationButton</span><span class="s2">, </span><span class="s3">&quot;Foundation&quot;</span><span class="s2">);</span>
+        <span class="s0">styleFilter</span><span class="s2">(</span><span class="s0">blushButton</span><span class="s2">, </span><span class="s3">&quot;Blush&quot;</span><span class="s2">);</span>
+        <span class="s0">styleFilter</span><span class="s2">(</span><span class="s0">lipstickButton</span><span class="s2">, </span><span class="s3">&quot;Lipstick&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private void </span><span class="s0">styleFilter</span><span class="s2">(</span>
+            <span class="s0">Button button</span><span class="s2">,</span>
+            <span class="s0">String category</span>
+    <span class="s2">) {</span>
+
+        <span class="s1">boolean </span><span class="s0">selected </span><span class="s2">=</span>
+                <span class="s0">activeCategory</span><span class="s2">.</span><span class="s0">equals</span><span class="s2">(</span><span class="s0">category</span><span class="s2">);</span>
+
+        <span class="s0">button</span><span class="s2">.</span><span class="s0">setStyle</span><span class="s2">(</span>
+                <span class="s3">&quot;-fx-background-color: &quot; </span><span class="s2">+</span>
+                        <span class="s2">(</span><span class="s0">selected </span><span class="s2">? </span><span class="s3">&quot;#D97DA5&quot; </span><span class="s2">: </span><span class="s3">&quot;#FBE7EF&quot;</span><span class="s2">) + </span><span class="s3">&quot;;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-text-fill: &quot; </span><span class="s2">+</span>
+                        <span class="s2">(</span><span class="s0">selected </span><span class="s2">? </span><span class="s3">&quot;white&quot; </span><span class="s2">: </span><span class="s3">&quot;#A75B7C&quot;</span><span class="s2">) + </span><span class="s3">&quot;;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-font-weight: bold;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-background-radius: 20;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-padding: 9 17;&quot; </span><span class="s2">+</span>
+                        <span class="s3">&quot;-fx-cursor: hand;&quot;</span>
+        <span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">showAll</span><span class="s2">() {</span>
+        <span class="s0">displayProducts</span><span class="s2">(</span><span class="s3">&quot;All&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">showFoundation</span><span class="s2">() {</span>
+        <span class="s0">displayProducts</span><span class="s2">(</span><span class="s3">&quot;Foundation&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">showBlush</span><span class="s2">() {</span>
+        <span class="s0">displayProducts</span><span class="s2">(</span><span class="s3">&quot;Blush&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">showLipstick</span><span class="s2">() {</span>
+        <span class="s0">displayProducts</span><span class="s2">(</span><span class="s3">&quot;Lipstick&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleHome</span><span class="s2">() </span><span class="s1">throws </span><span class="s0">IOException </span><span class="s2">{</span>
+        <span class="s0">SceneManager</span><span class="s2">.</span><span class="s0">switchScene</span><span class="s2">(</span><span class="s3">&quot;home.fxml&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleLogout</span><span class="s2">() </span><span class="s1">throws </span><span class="s0">IOException </span><span class="s2">{</span>
+        <span class="s0">SceneManager</span><span class="s2">.</span><span class="s0">switchScene</span><span class="s2">(</span><span class="s3">&quot;login.fxml&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@FXML</span>
+    <span class="s1">private void </span><span class="s0">handleCart</span><span class="s2">() {</span>
+
+        <span class="s0">Alert alert </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Alert</span><span class="s2">(</span>
+                <span class="s0">Alert</span><span class="s2">.</span><span class="s0">AlertType</span><span class="s2">.</span><span class="s0">INFORMATION</span>
+        <span class="s2">);</span>
+
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">setTitle</span><span class="s2">(</span><span class="s3">&quot;Blush &amp; Bloom&quot;</span><span class="s2">);</span>
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">setHeaderText</span><span class="s2">(</span><span class="s3">&quot;Your Shopping Cart&quot;</span><span class="s2">);</span>
+
+        <span class="s1">if </span><span class="s2">(</span><span class="s0">ShoppingCart</span><span class="s2">.</span><span class="s0">getItems</span><span class="s2">().</span><span class="s0">isEmpty</span><span class="s2">()) {</span>
+
+            <span class="s0">alert</span><span class="s2">.</span><span class="s0">setContentText</span><span class="s2">(</span>
+                    <span class="s3">&quot;Your cart is currently empty.&quot;</span>
+            <span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s1">else </span><span class="s2">{</span>
+
+            <span class="s0">StringBuilder details </span><span class="s2">=</span>
+                    <span class="s1">new </span><span class="s0">StringBuilder</span><span class="s2">();</span>
+
+            <span class="s1">for </span><span class="s2">(</span><span class="s0">ShoppingCart</span><span class="s2">.</span><span class="s0">CartItem item </span><span class="s2">:</span>
+                    <span class="s0">ShoppingCart</span><span class="s2">.</span><span class="s0">getItems</span><span class="s2">()) {</span>
+
+                <span class="s0">details</span><span class="s2">.</span><span class="s0">append</span><span class="s2">(</span><span class="s0">item</span><span class="s2">.</span><span class="s0">getProductName</span><span class="s2">())</span>
+                        <span class="s2">.</span><span class="s0">append</span><span class="s2">(</span><span class="s3">&quot; - &quot;</span><span class="s2">)</span>
+                        <span class="s2">.</span><span class="s0">append</span><span class="s2">(</span><span class="s0">item</span><span class="s2">.</span><span class="s0">getShade</span><span class="s2">())</span>
+                        <span class="s2">.</span><span class="s0">append</span><span class="s2">(</span><span class="s3">&quot; x&quot;</span><span class="s2">)</span>
+                        <span class="s2">.</span><span class="s0">append</span><span class="s2">(</span><span class="s0">item</span><span class="s2">.</span><span class="s0">getQuantity</span><span class="s2">())</span>
+                        <span class="s2">.</span><span class="s0">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s1">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s0">details</span><span class="s2">.</span><span class="s0">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s1">\n</span><span class="s3">Total: &quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s0">append</span><span class="s2">(</span><span class="s0">String</span><span class="s2">.</span><span class="s0">format</span><span class="s2">(</span>
+                            <span class="s3">&quot;₱%.2f&quot;</span><span class="s2">,</span>
+                            <span class="s0">ShoppingCart</span><span class="s2">.</span><span class="s0">getTotalPrice</span><span class="s2">()</span>
+                    <span class="s2">));</span>
+
+            <span class="s0">alert</span><span class="s2">.</span><span class="s0">setContentText</span><span class="s2">(</span><span class="s0">details</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">());</span>
+        <span class="s2">}</span>
+
+        <span class="s0">alert</span><span class="s2">.</span><span class="s0">showAndWait</span><span class="s2">();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
