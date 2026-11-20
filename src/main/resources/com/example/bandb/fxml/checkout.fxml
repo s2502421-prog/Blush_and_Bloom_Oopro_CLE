@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           maxWidth="440.0" maxHeight="350.0"
+           style="-fx-background-color: #FFF7FA; -fx-background-radius: 20; -fx-border-color: #E7B5CA; -fx-border-radius: 20;">
+
+    <Pane fx:id="petalsLayer" mouseTransparent="true"/>
+
+    <VBox spacing="16" alignment="CENTER" style="-fx-padding: 28;">
+        <Label fx:id="checkoutTitle" text="Confirm Your Order"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #8E3B61;"/>
+
+        <Label fx:id="checkoutDescription"
+               text="Review your cart summary below before placing your Blush &amp; Bloom order."
+               wrapText="true" textAlignment="CENTER"
+               style="-fx-font-size: 13px; -fx-text-fill: #7B5268;"/>
+
+        <VBox spacing="6" alignment="CENTER" maxWidth="Infinity"
+              style="-fx-background-color: #FCE9F1; -fx-padding: 14; -fx-background-radius: 14;">
+            <Label fx:id="checkoutCount" text="0 item(s)"
+                   style="-fx-font-size: 13px; -fx-text-fill: #9B7588; -fx-font-weight: bold;"/>
+            <Label fx:id="checkoutAmount" text="₱0.00"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #8E3B61;"/>
+        </VBox>
+
+        <Label fx:id="checkoutError" visible="false" managed="false" wrapText="true"
+               style="-fx-text-fill: #B02A5B; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+
+        <HBox spacing="12" alignment="CENTER">
+            <Button fx:id="checkoutBackButton" text="Back to Cart"
+                    style="-fx-background-color: #F7E8EF; -fx-text-fill: #8E3B61; -fx-font-weight: bold; -fx-background-radius: 20; -fx-padding: 10 20; -fx-cursor: hand;"/>
+            <Button fx:id="placeOrderButton" text="Place Order"
+                    style="-fx-background-color: #D45D8E; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20; -fx-padding: 10 24; -fx-cursor: hand;"/>
+        </HBox>
+    </VBox>
+</StackPane>

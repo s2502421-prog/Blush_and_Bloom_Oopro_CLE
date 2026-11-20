@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="12" style="-fx-padding: 16 12; -fx-background-color: #FFF8FB;"><children><Label fx:id="messageTitle" maxWidth="Infinity" wrapText="true" style="-fx-text-fill: #A65378; -fx-font-size: 19px; -fx-font-weight: bold;"/><Label fx:id="messageDescription" maxWidth="350" wrapText="true" style="-fx-text-fill: #825B6D; -fx-font-size: 13px;"/></children></VBox>

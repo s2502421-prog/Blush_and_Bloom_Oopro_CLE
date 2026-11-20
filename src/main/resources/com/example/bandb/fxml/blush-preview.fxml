@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" prefWidth="190" prefHeight="220"><children><Pane prefWidth="190" prefHeight="220"><children>
+<Ellipse centerX="95" centerY="191" radiusX="61" radiusY="7" fill="#EAD8DF" opacity="0.55"/>
+<Ellipse centerX="95" centerY="79" radiusX="65" radiusY="37" fill="#EABACD" stroke="#C98EA7" strokeWidth="2.5"/>
+<Ellipse centerX="95" centerY="79" radiusX="55" radiusY="29" fill="#FFF9FC" stroke="#F4E4ED" strokeWidth="3"/>
+<Ellipse centerX="75" centerY="70" radiusX="14" radiusY="5" rotate="-20" fill="WHITE" opacity="0.8"/>
+<Rectangle x="80" y="111" width="30" height="9" arcWidth="5" arcHeight="5" fill="#D9B67B"/>
+<Ellipse centerX="95" centerY="151" radiusX="66" radiusY="43" fill="#DFA7BE" stroke="#BE819A" strokeWidth="2.5"/>
+<Ellipse centerX="95" centerY="147" radiusX="55" radiusY="34" fill="#E4C28C"/>
+<Ellipse centerX="95" centerY="146" radiusX="51" radiusY="30" fill="#FFF1F6"/>
+<Ellipse fx:id="shadeShape" centerX="95" centerY="145" radiusX="45" radiusY="25" fill="#F5A9C0"/>
+<Ellipse centerX="78" centerY="137" radiusX="12" radiusY="4" rotate="-20" fill="WHITE" opacity="0.18"/>
+<Rectangle x="86" y="184" width="18" height="5" arcWidth="4" arcHeight="4" fill="#E8C991"/>
+</children></Pane></children></StackPane>

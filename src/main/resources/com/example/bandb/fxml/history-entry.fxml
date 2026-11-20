@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<Label xmlns:fx="http://javafx.com/fxml/1" fx:id="historyEntry" wrapText="true" maxWidth="Infinity" style="-fx-background-color: #FCE9F1; -fx-background-radius: 14; -fx-text-fill: #7B5268; -fx-font-size: 13px; -fx-padding: 17;"/>

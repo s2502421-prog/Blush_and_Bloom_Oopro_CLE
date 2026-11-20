@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      maxWidth="480.0" maxHeight="480.0" spacing="14"
+      style="-fx-background-color: #FFF7FA; -fx-padding: 24; -fx-background-radius: 20; -fx-border-color: #E7B5CA; -fx-border-radius: 20;">
+
+    <HBox alignment="CENTER_LEFT">
+        <Label text="Order History" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #8E3B61;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="historyBackButton" text="Close"
+                style="-fx-background-color: #F7E8EF; -fx-text-fill: #8E3B61; -fx-font-weight: bold; -fx-background-radius: 18; -fx-padding: 6 16; -fx-cursor: hand;"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background: transparent; -fx-background-color: transparent;">
+        <VBox fx:id="historyItems" spacing="12">
+            <padding>
+                <Insets top="4" right="4" bottom="4" left="4"/>
+            </padding>
+        </VBox>
+    </ScrollPane>
+</VBox>

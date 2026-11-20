@@ -1,0 +1,47 @@
+# Build output
+target/
+out/
+
+# ---- PRIVATE DATA: never commit customer, cart, order or inventory files ----
+BlushAndBloom/
+customers.properties
+carts/
+orders/
+products.properties*
+accounts.properties*
+*.corrupt-*
+
+# Generated HTML exports of the source code
+exportToHTML/
+
+# Maven wrapper jar must stay
+!.mvn/wrapper/maven-wrapper.jar
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" prefWidth="190" prefHeight="220"><children><Pane prefWidth="190" prefHeight="220"><children>
+<Ellipse centerX="95" centerY="207" radiusX="39" radiusY="5" fill="#EAD8DF" opacity="0.65"/>
+<Path fx:id="shadeShape" fill="#C97987" stroke="#C98EA7" strokeWidth="1.5"><elements><MoveTo x="76" y="113"/><LineTo x="76" y="70"/><CubicCurveTo controlX1="76" controlY1="54" controlX2="85" controlY2="45" x="99" y="43"/><CubicCurveTo controlX1="109" controlY1="41" controlX2="114" controlY2="47" x="114" y="56"/><LineTo x="114" y="113"/><ClosePath/></elements></Path>
+<Path fill="TRANSPARENT" stroke="WHITE" strokeWidth="4" opacity="0.25"><elements><MoveTo x="83" y="102"/><LineTo x="83" y="74"/><CubicCurveTo controlX1="83" controlY1="63" controlX2="89" controlY2="57" x="96" y="53"/></elements></Path>
+<Rectangle x="70" y="111" width="50" height="28" arcWidth="5" arcHeight="5" fill="#DDBB87"/>
+<Rectangle x="77" y="116" width="5" height="18" fill="#FFF0D2" opacity="0.65"/>
+<Rectangle x="66" y="138" width="58" height="10" arcWidth="4" arcHeight="4" fill="#F0D5A4"/>
+<Rectangle x="65" y="147" width="60" height="55" arcWidth="12" arcHeight="12" fill="#D991B1" stroke="#C98EA7" strokeWidth="2"/>
+<Rectangle x="73" y="154" width="6" height="35" arcWidth="6" arcHeight="6" fill="WHITE" opacity="0.35"/>
+<Rectangle x="69" y="193" width="52" height="4" fill="#F0D5A4"/>
+</children></Pane></children></StackPane>

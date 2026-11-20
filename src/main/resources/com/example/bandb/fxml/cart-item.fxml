@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      alignment="CENTER_LEFT" spacing="14"
+      style="-fx-background-color: white; -fx-padding: 14 18; -fx-background-radius: 16; -fx-border-color: #F3D1DF; -fx-border-radius: 16; -fx-effect: dropshadow(three-pass-box, rgba(166,83,120,0.08), 8, 0, 0, 3);">
+
+    <Label fx:id="itemSwatch" text="●" style="-fx-font-size: 54px; -fx-text-fill: #E9A6C0;"/>
+
+    <VBox spacing="3" HBox.hgrow="ALWAYS">
+        <Label fx:id="itemName" text="Product Name" wrapText="true"
+               style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #6D344F;"/>
+        <Label fx:id="itemShade" text="Shade: Soft Rose"
+               style="-fx-font-size: 12px; -fx-text-fill: #9B7588;"/>
+        <Label fx:id="itemLimit" text="Max stock/order limit reached" visible="false" managed="false"
+               style="-fx-font-size: 11px; -fx-text-fill: #C84B78; -fx-font-weight: bold;"/>
+    </VBox>
+
+    <HBox alignment="CENTER" spacing="8" style="-fx-background-color: #FCE9F1; -fx-background-radius: 20; -fx-padding: 4 8;">
+        <Button fx:id="itemMinus" text="−" prefWidth="28" prefHeight="28"
+                style="-fx-background-color: white; -fx-text-fill: #A65378; -fx-font-weight: bold; -fx-background-radius: 14; -fx-cursor: hand;"/>
+        <Label fx:id="itemQuantity" text="1" minWidth="24" alignment="CENTER"
+               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #6D344F;"/>
+        <Button fx:id="itemPlus" text="+" prefWidth="28" prefHeight="28"
+                style="-fx-background-color: white; -fx-text-fill: #A65378; -fx-font-weight: bold; -fx-background-radius: 14; -fx-cursor: hand;"/>
+    </HBox>
+
+    <VBox alignment="CENTER_RIGHT" spacing="6" minWidth="95">
+        <Label fx:id="itemSubtotal" text="₱0.00"
+               style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #8E3B61;"/>
+        <Button fx:id="itemRemove" text="Remove"
+                style="-fx-background-color: transparent; -fx-text-fill: #B86B88; -fx-font-size: 11px; -fx-underline: true; -fx-padding: 0; -fx-cursor: hand;"/>
+    </VBox>
+</HBox>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           prefWidth="650.0" prefHeight="635.0"
+           style="-fx-background-color: #FFF7FA;">
+
+    <BorderPane>
+        <top>
+            <VBox spacing="8" style="-fx-background-color: #FCE9F1; -fx-padding: 20 24 16 24; -fx-border-color: #F4C6D8; -fx-border-width: 0 0 1 0;">
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <VBox spacing="2" HBox.hgrow="ALWAYS">
+                        <Label text="Blush &amp; Bloom Cart" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #8E3B61;"/>
+                        <Label fx:id="countLabel" text="0 item(s)" style="-fx-font-size: 13px; -fx-text-fill: #A78495;"/>
+                    </VBox>
+                    <Button fx:id="historyButton" text="Order History"
+                            style="-fx-background-color: white; -fx-text-fill: #A65378; -fx-font-weight: bold; -fx-background-radius: 20; -fx-padding: 8 16; -fx-border-color: #E7B5CA; -fx-border-radius: 20; -fx-cursor: hand;"/>
+                </HBox>
+
+                <Label fx:id="messageLabel" visible="false" managed="false" wrapText="true" maxWidth="Infinity"
+                       style="-fx-background-color: #FFE4EC; -fx-text-fill: #B02A5B; -fx-padding: 10 14; -fx-background-radius: 10; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+            </VBox>
+        </top>
+
+        <center>
+            <ScrollPane fitToWidth="true" style="-fx-background: #FFF7FA; -fx-background-color: transparent;">
+                <VBox fx:id="itemList" spacing="12">
+                    <padding>
+                        <Insets top="18" right="24" bottom="18" left="24"/>
+                    </padding>
+                </VBox>
+            </ScrollPane>
+        </center>
+
+        <bottom>
+            <VBox spacing="14" style="-fx-background-color: white; -fx-padding: 18 24 22 24; -fx-border-color: #F4C6D8; -fx-border-width: 1 0 0 0;">
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Estimated Total" style="-fx-font-size: 15px; -fx-text-fill: #7B5268; -fx-font-weight: bold;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="totalLabel" text="₱0.00" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #8E3B61;"/>
+                </HBox>
+
+                <HBox spacing="12" alignment="CENTER_RIGHT">
+                    <Button fx:id="continueButton" text="Continue Shopping"
+                            style="-fx-background-color: #F7E8EF; -fx-text-fill: #8E3B61; -fx-font-weight: bold; -fx-background-radius: 22; -fx-padding: 11 20; -fx-cursor: hand;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="checkoutButton" text="Proceed to Checkout"
+                            style="-fx-background-color: #D45D8E; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 22; -fx-padding: 11 26; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+        </bottom>
+    </BorderPane>
+</StackPane>

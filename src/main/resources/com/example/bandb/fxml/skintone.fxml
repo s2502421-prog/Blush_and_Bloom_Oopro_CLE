@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.bandb.controller.SkinToneController"
+           stylesheets="@skintone.css"
+           styleClass="background"
+           prefWidth="1280"
+           prefHeight="720">
+
+
+<VBox alignment="CENTER"
+          spacing="22"
+          maxWidth="800"
+          maxHeight="650"
+          styleClass="selection-card">
+
+        <Label text="❀" styleClass="flower-logo"/>
+
+        <Label text="Blush &amp; Bloom"
+               styleClass="brand-title"/>
+
+        <Label text="Find Your Perfect Shade"
+               styleClass="page-title"/>
+
+        <Label text="Choose the skin tone closest to yours."
+               styleClass="subtitle"/>
+
+        <GridPane alignment="CENTER"
+                  hgap="20" vgap="20">
+
+            <ToggleButton fx:id="fairButton"
+                          text="Fair"
+                          onAction="#handleFair"
+                          styleClass="tone-fair"
+                          GridPane.columnIndex="0"
+                          GridPane.rowIndex="0"/>
+
+            <ToggleButton fx:id="lightButton"
+                          text="Light"
+                          onAction="#handleLight"
+                          styleClass="tone-light"
+                          GridPane.columnIndex="1"
+                          GridPane.rowIndex="0"/>
+
+            <ToggleButton fx:id="mediumButton"
+                          text="Medium"
+                          onAction="#handleMedium"
+                          styleClass="tone-medium"
+                          GridPane.columnIndex="2"
+                          GridPane.rowIndex="0"/>
+
+            <ToggleButton fx:id="tanButton"
+                          text="Tan"
+                          onAction="#handleTan"
+                          styleClass="tone-tan"
+                          GridPane.columnIndex="0"
+                          GridPane.rowIndex="1"/>
+
+            <ToggleButton fx:id="deepButton"
+                          text="Deep"
+                          onAction="#handleDeep"
+                          styleClass="tone-deep"
+                          GridPane.columnIndex="1"
+                          GridPane.rowIndex="1"/>
+
+            <ToggleButton fx:id="richDeepButton"
+                          text="Rich Deep"
+                          onAction="#handleRichDeep"
+                          styleClass="tone-rich"
+                          GridPane.columnIndex="2"
+                          GridPane.rowIndex="1"/>
+
+        </GridPane>
+
+        <Label fx:id="selectedLabel"
+               text="No skin tone selected"
+               styleClass="selected-label"/>
+
+        <Button text="Find My Makeup"
+                onAction="#handleContinue"
+                styleClass="continue-button"/>
+
+    </VBox>
+</StackPane>

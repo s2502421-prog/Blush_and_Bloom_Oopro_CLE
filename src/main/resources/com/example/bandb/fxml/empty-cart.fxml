@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="17" style="-fx-padding: 65 15;"><children><Label text="♡" style="-fx-font-size: 65px; -fx-text-fill: #CE78A0;"/><Label text="Your cart is waiting to bloom!" wrapText="true" style="-fx-font-size: 21px; -fx-text-fill: #A65378; -fx-font-weight: bold;"/><Label text="Add your favorite makeup shades to get started." wrapText="true" style="-fx-font-size: 13px; -fx-text-fill: #A78495;"/></children></VBox>

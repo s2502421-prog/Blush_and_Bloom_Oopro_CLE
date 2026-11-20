@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<Label xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" textAlignment="CENTER" maxWidth="Infinity" wrapText="true" text="No completed orders yet.&#10;Your past purchases will appear here." style="-fx-text-fill: #9B7588; -fx-font-size: 15px;"/>

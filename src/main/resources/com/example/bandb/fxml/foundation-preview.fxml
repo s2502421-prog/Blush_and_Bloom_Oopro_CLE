@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" prefWidth="190" prefHeight="220"><children><Pane prefWidth="190" prefHeight="220"><children>
+<Rectangle x="65" y="10" width="60" height="35" arcWidth="10" arcHeight="10" fill="#D7A1B7"/>
+<Rectangle x="78" y="40" width="34" height="18" fill="#E9D4DC"/>
+<Rectangle x="35" y="55" width="120" height="150" arcWidth="22" arcHeight="22" fill="#FFF0F5" stroke="#C995AB" strokeWidth="2"/>
+<Rectangle fx:id="shadeShape" x="43" y="85" width="104" height="112" arcWidth="16" arcHeight="16" fill="#F4D9C9"/>
+<Rectangle x="54" y="125" width="82" height="43" arcWidth="8" arcHeight="8" fill="#FFF8FB" opacity="0.9"/>
+<Line startX="49" startY="70" endX="49" endY="108" stroke="WHITE" strokeWidth="4" opacity="0.7"/>
+</children></Pane></children></StackPane>
