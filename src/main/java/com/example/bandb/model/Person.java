@@ -58,8 +58,6 @@ public abstract class Person {
     /** Each subclass states its own role (polymorphism). */
     public abstract String getRole();
 
-    /** Only some roles may manage the product inventory. */
-    public abstract boolean canManageInventory();
 
     @Override
     public String toString() {

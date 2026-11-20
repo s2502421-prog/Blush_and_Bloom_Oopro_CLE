@@ -1,3 +1,5 @@
+NOTE: This document records earlier merge history. Admin/inventory features mentioned below were removed from the final customer-only application.
+
 # Blush & Bloom — Three-Member Merge Notes
 
 ## Kept from the working application

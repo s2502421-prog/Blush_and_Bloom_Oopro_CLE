@@ -14,8 +14,4 @@ public class Customer extends Person {
         return ROLE;
     }
 
-    @Override
-    public boolean canManageInventory() {
-        return false;
-    }
 }
