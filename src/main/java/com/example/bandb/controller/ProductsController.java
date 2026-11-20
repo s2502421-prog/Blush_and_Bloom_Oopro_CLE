@@ -2,6 +2,7 @@ package com.example.bandb.controller;
 
 import com.example.bandb.app.SceneManager;
 import com.example.bandb.service.Session;
+import com.example.bandb.ui.BeautyDialogs;
 import com.example.bandb.service.ShoppingCart;
 import com.example.bandb.ui.BlushPreview;
 import com.example.bandb.ui.FoundationPreview;
@@ -17,6 +18,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Group;
+import javafx.scene.transform.Scale;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
@@ -31,7 +34,6 @@ public class ProductsController {
     @FXML private Label skinToneLabel;
     @FXML private Label productCountLabel;
     @FXML private Button cartCountButton;
-    @FXML private Button inventoryButton;
     @FXML private Button allButton;
     @FXML private Button foundationButton;
     @FXML private Button blushButton;
@@ -61,11 +63,6 @@ public class ProductsController {
             );
         }
 
-        if (inventoryButton != null) {
-            boolean admin = Session.isAdmin();
-            inventoryButton.setVisible(admin);
-            inventoryButton.setManaged(admin);
-        }
 
         refreshShop();
         Platform.runLater(this::updateCartCount);
@@ -298,12 +295,14 @@ public class ProductsController {
                                     " item(s) in your cart"
                     );
 
+            // Scale the illustration inside a Group so JavaFX lays out its
+            // scaled dimensions instead of its original 190 x 220 size.
             Node illustration = createIllustration(product);
-            illustration.setScaleX(0.6);
-            illustration.setScaleY(0.6);
+            illustration.getTransforms().add(new Scale(0.36, 0.36, 0, 0));
+            Group fittedIllustration = new Group(illustration);
 
-            ((StackPane) loader.getNamespace().get("addedPreview"))
-                    .getChildren().setAll(illustration);
+            StackPane preview = (StackPane) loader.getNamespace().get("addedPreview");
+            preview.getChildren().setAll(fittedIllustration);
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Blush & Bloom");
@@ -435,15 +434,17 @@ public class ProductsController {
         SceneManager.switchScene("home.fxml");
     }
 
-    @FXML
-    private void handleInventory() {
-        if (Session.isAdmin()) {
-            SceneManager.switchScene("inventory.fxml");
-        }
-    }
 
     @FXML
     private void handleLogout() {
+        javafx.stage.Window owner = null;
+        if (productGrid != null && productGrid.getScene() != null) {
+            owner = productGrid.getScene().getWindow();
+        }
+        if (!BeautyDialogs.confirm(owner, "Log out of Blush & Bloom?",
+                "You can sign back in whenever you like.", "Yes, Log Out")) {
+            return;
+        }
         Session.end();
         SceneManager.switchScene("login.fxml");
     }

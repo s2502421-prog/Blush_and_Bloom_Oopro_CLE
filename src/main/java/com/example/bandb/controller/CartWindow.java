@@ -2,6 +2,7 @@ package com.example.bandb.controller;
 
 import com.example.bandb.app.SceneManager;
 import com.example.bandb.service.ShoppingCart;
+import com.example.bandb.ui.BeautyDialogs;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -157,7 +158,10 @@ public class CartWindow {
         itemList.getChildren().clear();
 
         if (ShoppingCart.isEmpty()) {
-            itemList.getChildren().add(loadView("empty-cart.fxml").root);
+            View empty = loadView("empty-cart.fxml");
+            ((Button) empty.get("emptyShopButton"))
+                    .setOnAction(e -> stage.close());
+            itemList.getChildren().add(empty.root);
 
         } else {
             for (ShoppingCart.CartItem item : ShoppingCart.getItems()) {
@@ -282,16 +286,11 @@ public class CartWindow {
         return row;
     }
 
-    /** Adapted from Ehrica's CartController.confirmRemove() contribution. */
+    /** Customer-themed FXML confirmation before removing an item. */
     private boolean confirmRemove(ShoppingCart.CartItem item) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                "Remove " + item.getProductName() + " from your cart?",
-                ButtonType.YES, ButtonType.NO);
-        alert.setTitle("Blush & Bloom");
-        alert.setHeaderText(null);
-        alert.initOwner(stage);
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == ButtonType.YES;
+        return BeautyDialogs.confirm(stage, "Remove this item?",
+                "Are you sure you want to remove " + item.getProductName()
+                        + " from your cart?", "Yes, Remove");
     }
 
     private String shadeColor(String shade) {
@@ -391,6 +390,8 @@ public class CartWindow {
         Label amount = (Label) view.get("checkoutAmount");
         Label count = (Label) view.get("checkoutCount");
         Label error = (Label) view.get("checkoutError");
+        javafx.scene.control.CheckBox review =
+                (javafx.scene.control.CheckBox) view.get("reviewCheckbox");
 
         Button confirm =
                 (Button) view.get("placeOrderButton");
@@ -431,6 +432,14 @@ public class CartWindow {
         back.setOnAction(e -> hideOverlay());
 
         confirm.setOnAction(e -> {
+            if (!review.isSelected()) {
+                error.setText("Please confirm that you reviewed your order.");
+                error.setVisible(true);
+                error.setManaged(true);
+                return;
+            }
+            error.setVisible(false);
+            error.setManaged(false);
             confirm.setDisable(true);
 
             int ordered = ShoppingCart.getTotalQuantity();
@@ -442,7 +451,9 @@ public class CartWindow {
                 orderPlaced = true;
                 refreshCart();
 
-                title.setText("Order Placed Successfully!");
+                title.setText("♡ Order Placed Successfully!");
+                review.setVisible(false);
+                review.setManaged(false);
 
                 description.setText(
                         "Thank you for shopping with Blush & Bloom!\n" +

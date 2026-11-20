@@ -1,31 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      spacing="14" alignment="CENTER" prefWidth="360.0"
-      style="-fx-background-color: #FFF8FB; -fx-padding: 20;">
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      alignment="CENTER" spacing="18"
+      prefWidth="430" minWidth="430" maxWidth="430"
+      style="-fx-background-color: #FFF8FB; -fx-padding: 24 22 16 22;">
 
     <Label text="Added to Your Cart!"
-           style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #8E3B61;"/>
+           style="-fx-font-size: 21px; -fx-font-weight: bold; -fx-text-fill: #9B3F6A;"/>
 
-    <HBox alignment="CENTER_LEFT" spacing="14"
-          style="-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 14; -fx-border-color: #F2DAE4; -fx-border-radius: 14;">
-        <StackPane fx:id="addedPreview" prefWidth="65" prefHeight="65"/>
+    <HBox alignment="CENTER_LEFT" spacing="16"
+          minHeight="125" prefHeight="125"
+          style="-fx-background-color: white; -fx-padding: 14; -fx-background-radius: 16; -fx-border-color: #F2DAE4; -fx-border-radius: 16;">
 
-        <VBox spacing="4" HBox.hgrow="ALWAYS">
-            <Label fx:id="addedProductName" text="Product Name" wrapText="true"
-                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #6D344F;"/>
-            <Label fx:id="addedShade" text="Shade: Soft Rose"
-                   style="-fx-font-size: 12px; -fx-text-fill: #9B7588;"/>
+        <StackPane fx:id="addedPreview"
+                   prefWidth="90" prefHeight="92"
+                   minWidth="90" minHeight="92"
+                   maxWidth="90" maxHeight="92"
+                   style="-fx-background-color: #FFF1F7; -fx-background-radius: 12;"/>
+
+        <VBox alignment="CENTER_LEFT" spacing="7" HBox.hgrow="ALWAYS">
+            <Label fx:id="addedProductName" text="Product Name"
+                   wrapText="true" maxWidth="240"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #71344F;"/>
+            <Label fx:id="addedShade" text="Shade"
+                   wrapText="true" maxWidth="240"
+                   style="-fx-font-size: 13px; -fx-text-fill: #A0788D;"/>
             <Label fx:id="addedPrice" text="₱0.00"
-                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #D45D8E;"/>
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #D45D8E;"/>
         </VBox>
     </HBox>
 
     <Label fx:id="addedCartCount" text="1 item(s) in your cart"
-           style="-fx-font-size: 12px; -fx-text-fill: #A78495; -fx-font-weight: bold;"/>
+           style="-fx-font-size: 13px; -fx-text-fill: #A78495; -fx-font-weight: bold;"/>
 </VBox>

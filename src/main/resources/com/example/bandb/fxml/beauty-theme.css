@@ -1,0 +1,3 @@
+.button { -fx-cursor: hand; }
+.button:focused { -fx-border-color: #C65F8D; -fx-border-radius: 12; }
+.text-field:focused, .password-field:focused { -fx-focus-color: #D97DA5; -fx-faint-focus-color: #F9DDE8; }

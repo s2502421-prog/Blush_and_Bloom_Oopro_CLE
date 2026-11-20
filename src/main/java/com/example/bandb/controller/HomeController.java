@@ -1,12 +1,13 @@
+
 package com.example.bandb.controller;
 
 import com.example.bandb.app.SceneManager;
 import com.example.bandb.service.Session;
+import com.example.bandb.ui.BeautyDialogs;
 import com.example.bandb.service.ShoppingCart;
 import com.example.bandb.ui.BlushPreview;
 import com.example.bandb.ui.FoundationPreview;
 import com.example.bandb.ui.LipstickPreview;
-
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -33,13 +34,12 @@ public class HomeController {
     @FXML private ImageView bannerImage;
 
     @FXML private Button cartCountButton;
-    @FXML private Button inventoryButton;
 
     @FXML
     public void initialize() {
 
+        // Automatically resize the banner.
         if (bannerImage != null && bannerContainer != null) {
-
             bannerImage.fitWidthProperty().bind(
                     bannerContainer.widthProperty()
             );
@@ -49,6 +49,7 @@ public class HomeController {
             );
         }
 
+        // Get the customer's selected skin tone.
         String tone = SkinToneController.getSelectedSkinTone();
 
         if (tone == null || tone.isBlank()) {
@@ -119,37 +120,42 @@ public class HomeController {
                 break;
         }
 
+        // Display the selected skin tone.
         if (skinToneLabel != null) {
             skinToneLabel.setText(tone);
         }
 
+        // Display the personalized message.
         if (beautyMessage != null) {
             beautyMessage.setText(
-                    "Beautiful shades selected for your " +
-                            tone + " skin tone."
+                    "Beautiful shades selected for your "
+                            + tone + " skin tone."
             );
         }
 
+        // Display recommended foundation.
         if (foundationShade != null) {
             foundationShade.setText(
                     "Shade: " + foundationName
             );
         }
 
+        // Display recommended blush.
         if (blushShade != null) {
             blushShade.setText(
                     "Shade: " + blushName
             );
         }
 
+        // Display recommended lipstick.
         if (lipstickShade != null) {
             lipstickShade.setText(
                     "Shade: " + lipstickName
             );
         }
 
+        // Foundation preview.
         if (foundationContainer != null) {
-
             FoundationPreview foundation =
                     new FoundationPreview();
 
@@ -160,8 +166,8 @@ public class HomeController {
             );
         }
 
+        // Blush preview.
         if (blushContainer != null) {
-
             BlushPreview blush = new BlushPreview();
 
             blush.setShadeColor(blushColor);
@@ -171,8 +177,8 @@ public class HomeController {
             );
         }
 
+        // Lipstick preview.
         if (lipstickContainer != null) {
-
             LipstickPreview lipstick =
                     new LipstickPreview();
 
@@ -183,14 +189,13 @@ public class HomeController {
             );
         }
 
-        if (inventoryButton != null) {
-            boolean admin = Session.isAdmin();
-            inventoryButton.setVisible(admin);
-            inventoryButton.setManaged(admin);
-        }
-
+        // Set up customer shopping cart counter.
         setupCartCounter();
     }
+
+    // ------------------------------------------------------------
+    // SHOPPING CART COUNTER
+    // ------------------------------------------------------------
 
     private void setupCartCounter() {
 
@@ -204,7 +209,6 @@ public class HomeController {
 
         anchor.sceneProperty().addListener(
                 (observable, oldScene, newScene) -> {
-
                     if (newScene != null) {
                         Platform.runLater(this::updateCartCount);
                     }
@@ -288,14 +292,12 @@ public class HomeController {
             if (child instanceof Button) {
 
                 Button button = (Button) child;
-
                 String text = button.getText();
 
                 if (text != null &&
                         text.trim().matches(
                                 "(?i)My Cart(?:\\s*\\(\\d+\\))?"
                         )) {
-
                     return button;
                 }
             }
@@ -315,16 +317,13 @@ public class HomeController {
         return null;
     }
 
+    // ------------------------------------------------------------
+    // CUSTOMER NAVIGATION
+    // ------------------------------------------------------------
+
     @FXML
     private void handleProducts() {
         SceneManager.switchScene("products.fxml");
-    }
-
-    @FXML
-    private void handleInventory() {
-        if (Session.isAdmin()) {
-            SceneManager.switchScene("inventory.fxml");
-        }
     }
 
     @FXML
@@ -341,23 +340,28 @@ public class HomeController {
         }
 
         try {
-
             CartWindow.show(
                     scene.getWindow()
             );
 
         } catch (RuntimeException exception) {
-
             exception.printStackTrace();
 
         } finally {
-
             updateCartCount();
         }
     }
 
     @FXML
     private void handleLogout() {
+        javafx.stage.Window owner = null;
+        if (getHomeScene() != null) {
+            owner = getHomeScene().getWindow();
+        }
+        if (!BeautyDialogs.confirm(owner, "Log out of Blush & Bloom?",
+                "You can sign back in whenever you like.", "Yes, Log Out")) {
+            return;
+        }
         Session.end();
         SceneManager.switchScene("login.fxml");
     }

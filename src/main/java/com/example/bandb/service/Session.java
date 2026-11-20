@@ -27,9 +27,6 @@ public final class Session {
         return current != null;
     }
 
-    public static synchronized boolean isAdmin() {
-        return current != null && current.canManageInventory();
-    }
 
     public static synchronized String getDisplayName() {
         return current == null ? "" : current.getFullName();

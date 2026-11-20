@@ -1,0 +1,11 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="18" prefWidth="410" styleClass="dialog-panel" stylesheets="@beauty-dialog.css">
+    <Label text="♡" styleClass="dialog-icon"/>
+    <Label fx:id="dialogTitle" text="Are you sure?" styleClass="dialog-title" wrapText="true"/>
+    <Label fx:id="dialogMessage" text="Please confirm your choice." styleClass="dialog-message" wrapText="true" textAlignment="CENTER" maxWidth="350"/>
+    <HBox alignment="CENTER" spacing="12">
+        <Button fx:id="cancelButton" text="Cancel" styleClass="dialog-secondary" prefWidth="155"/>
+        <Button fx:id="confirmButton" text="Yes, Remove" styleClass="dialog-primary" prefWidth="155"/>
+    </HBox>
+</VBox>

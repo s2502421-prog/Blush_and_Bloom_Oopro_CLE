@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -27,12 +26,6 @@
 
             <Button fx:id="cartCountButton" text="My Cart (0)"
                     onAction="#handleCart" maxWidth="Infinity"
-                    style="-fx-background-color: #FFF0F6; -fx-text-fill: #A65378; -fx-background-radius: 10; -fx-padding: 12;"/>
-
-            <Button fx:id="inventoryButton" text="Manage Inventory"
-                    onAction="#handleInventory"
-                    visible="false" managed="false"
-                    maxWidth="Infinity"
                     style="-fx-background-color: #FFF0F6; -fx-text-fill: #A65378; -fx-background-radius: 10; -fx-padding: 12;"/>
 
             <Region VBox.vgrow="ALWAYS"/>

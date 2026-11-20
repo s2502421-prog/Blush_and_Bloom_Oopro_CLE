@@ -1,0 +1,9 @@
+.root { -fx-font-family: "Segoe UI", "Arial"; }
+.dialog-panel { -fx-background-color: #FFF8FB; -fx-padding: 28 25 26 25; -fx-background-radius: 20; }
+.dialog-icon { -fx-font-size: 44px; -fx-text-fill: #D97DA5; -fx-background-color: #FCE5EF; -fx-background-radius: 100; -fx-min-width: 72; -fx-min-height: 72; -fx-alignment: center; }
+.dialog-title { -fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #923C64; -fx-alignment: center; }
+.dialog-message { -fx-font-size: 14px; -fx-text-fill: #856878; -fx-alignment: center; }
+.dialog-primary { -fx-background-color: #D97DA5; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12; -fx-background-radius: 12; -fx-cursor: hand; }
+.dialog-secondary { -fx-background-color: #F9E4ED; -fx-text-fill: #A65378; -fx-font-weight: bold; -fx-padding: 12; -fx-background-radius: 12; -fx-cursor: hand; }
+.dialog-primary:hover { -fx-background-color: #C75D8E; }
+.dialog-secondary:hover { -fx-background-color: #F4D1E0; }

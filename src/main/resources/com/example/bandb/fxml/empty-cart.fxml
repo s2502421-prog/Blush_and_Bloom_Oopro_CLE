@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="17" style="-fx-padding: 65 15;"><children><Label text="♡" style="-fx-font-size: 65px; -fx-text-fill: #CE78A0;"/><Label text="Your cart is waiting to bloom!" wrapText="true" style="-fx-font-size: 21px; -fx-text-fill: #A65378; -fx-font-weight: bold;"/><Label text="Add your favorite makeup shades to get started." wrapText="true" style="-fx-font-size: 13px; -fx-text-fill: #A78495;"/></children></VBox>
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="15" style="-fx-padding: 50 15;">
+    <Label text="♡" style="-fx-font-size: 66px; -fx-text-fill: #D97DA5; -fx-background-color: #FCE5EF; -fx-background-radius: 100; -fx-min-width: 110; -fx-min-height: 110; -fx-alignment: center;"/>
+    <Label text="Your cart is waiting to bloom!" wrapText="true" style="-fx-font-size: 21px; -fx-text-fill: #A65378; -fx-font-weight: bold;"/>
+    <Label text="Add your favorite makeup shades to get started." wrapText="true" style="-fx-font-size: 13px; -fx-text-fill: #A78495;"/>
+    <Button fx:id="emptyShopButton" text="Continue Shopping" style="-fx-background-color: #D97DA5; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20; -fx-padding: 12 24; -fx-cursor: hand;"/>
+</VBox>
